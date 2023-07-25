@@ -1,7 +1,14 @@
+import React from "react";
+import AudioPlayer from "./Components/AudioPlayer";
+
 export default function App() {
   return (
     <>
-      <h1 className="text-8xl font-bold underline">Hello world!</h1>
+      <React.StrictMode>
+        <div className="flex justify-center items-center h-screen text-2xl font-semibold">
+          <AudioPlayer />
+        </div>
+      </React.StrictMode>
     </>
   );
 }
