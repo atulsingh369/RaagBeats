@@ -12,7 +12,7 @@ const AudioPlayer = () => {
   console.log(audioRef);
 
   return (
-    <div className="flex p-5 border-2 rounded-xl border-black w-1/3 flex-col items-center">
+    <div className="flex p-1 border-2 rounded-xl border-black w-1/3 flex-col items-center">
       <DisplayTrack currentTrack={currentTrack} audioRef={audioRef} />
       <Controls audioRef={audioRef} />
       <ProgressBar />

@@ -17,7 +17,7 @@ const Controls = ({ audioRef }) => {
   }, [isPlaying, audioRef]);
 
   return (
-    <div className="w-full flex justify-evenly">
+    <div className="w-full flex justify-evenly my-2">
       <button title="Skip Back">
         <IoPlaySkipBackSharp />
       </button>
