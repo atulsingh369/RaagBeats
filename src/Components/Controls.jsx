@@ -18,20 +18,24 @@ const Controls = ({ audioRef }) => {
 
   return (
     <div className="w-full flex justify-evenly">
-      <button>
+      <button title="Skip Back">
         <IoPlaySkipBackSharp />
       </button>
-      <button>
+      <button title="Previous">
         <IoPlayBackSharp />
       </button>
 
       <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+        {isPlaying ? (
+          <IoPauseSharp title="Pause" />
+        ) : (
+          <IoPlaySharp title="Play" />
+        )}
       </button>
-      <button>
+      <button title="Next">
         <IoPlayForwardSharp />
       </button>
-      <button>
+      <button title="Skip Forward">
         <IoPlaySkipForwardSharp />
       </button>
     </div>
