@@ -5,9 +5,8 @@ const DisplayTrack = ({
   audioRef,
   setDuration,
   progressBarRef,
+  handleNext,
 }) => {
- 
-
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
     setDuration(seconds);
@@ -19,9 +18,8 @@ const DisplayTrack = ({
       <div
         style={{
           backgroundImage: "url(" + `${currentTrack.thumbnail}` + ")",
-          backgroundColor: "#000",
         }}
-        className="flex md:w-fit md:animate-spin-slow w-full items-center justify-center rounded-box md:rounded-full bg-no-repeat bg-cover md:mb-0 mb-8">
+        className="flex md:w-fit md:animate-spin-slow w-full items-center justify-center rounded-box md:rounded-full bg-no-repeat bg-cover md:mb-0 mb-8 bg-secondary">
         {currentTrack.thumbnail ? (
           <div className="flex h-96 md:w-24 md:h-24 w-full rounded-box md:rounded-full items-center backdrop-blur-md">
             <img
@@ -31,7 +29,7 @@ const DisplayTrack = ({
             />
           </div>
         ) : (
-          <BsMusicNoteBeamed className="text-7xl text-white my-24" />
+          <BsMusicNoteBeamed className="text-7xl text-white" />
         )}
       </div>
       <div className="space-y-2">
@@ -41,6 +39,7 @@ const DisplayTrack = ({
       <audio
         src={currentTrack.src}
         ref={audioRef}
+        onEnded={handleNext}
         onLoadedMetadata={onLoadedMetadata}
       />
     </div>
