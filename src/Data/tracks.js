@@ -14,18 +14,6 @@ import trinix from './trinix.jpeg';
 
 const tracks = [
 	{
-		title: 'We Are The World',
-		src: world,
-		author: 'Michael Jackson',
-		thumbnail: jackson,
-	},
-	{
-		title: 'Its a beautiful day',
-		src: beautiful,
-		author: 'Trinix ft Rushawn',
-		thumbnail: trinix,
-	},
-	{
 		title: "Top Of The World",
 		src: top,
 		author: 'Dbanj',
@@ -38,14 +26,26 @@ const tracks = [
 		thumbnail: lexin,
 	},
 	{
-		title: 'Forest Lullaby',
-		src: forest,
-		author: 'Lesfm',
-	},
-	{
 		title: 'The Podcast Intro',
 		src: podcast,
 		author: 'Music Unlimited',
+	},
+	{
+		title: 'Its a beautiful day',
+		src: beautiful,
+		author: 'Trinix ft Rushawn',
+		thumbnail: trinix,
+	},
+	{
+		title: 'We Are The World',
+		src: world,
+		author: 'Michael Jackson',
+		thumbnail: jackson,
+	},
+	{
+		title: 'Forest Lullaby',
+		src: forest,
+		author: 'Lesfm',
 	},
 ];
 

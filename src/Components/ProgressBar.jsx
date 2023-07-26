@@ -1,12 +1,33 @@
-const ProgressBar = () => {
+import "./slider.css";
+
+const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
+  const handleProgressChange = () => {
+    audioRef.current.currentTime = progressBarRef.current.value;
+  };
+
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
+  };
+
   return (
     <>
-      <div className="flex w-full justify-between items-center p-5">
-        <div>0:00</div>
-        <div className="w-9/12 bg-primary rounded-full h-1">
-          <div className="bg-white w-1/2 h-full rounded-full"></div>
-        </div>
-        <div>5:00</div>
+      <div className="flex w-full justify-evenly items-center mx-5">
+        <div>{formatTime(timeProgress)}</div>
+        <input
+          ref={progressBarRef}
+          type="range"
+          defaultValue="0"
+          onChange={handleProgressChange}
+          className="slide appearance-none w-2/3 h-2 bg-[#666666] cursor-pointer overflow-hidden rounded-xl transition-all duration-100"
+        />
+        <div>{formatTime(duration)}</div>
       </div>
     </>
   );
