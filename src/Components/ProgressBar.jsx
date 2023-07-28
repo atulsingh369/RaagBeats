@@ -18,7 +18,7 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
   return (
     <>
-      <div className="flex w-full justify-evenly items-center mx-5">
+      <div className="md:flex hidden w-full justify-evenly items-center mx-5">
         <div>{formatTime(timeProgress)}</div>
         <input
           ref={progressBarRef}

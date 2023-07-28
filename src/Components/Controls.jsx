@@ -77,11 +77,14 @@ const Controls = ({
     <>
       <div className="w-full flex justify-evenly items-center">
         {/* Audio Control */}
-        <div className="w-2/3 flex justify-evenly items-center">
+        <div className="md:w-2/3 w-full flex justify-evenly items-center">
           <button title="Skip Back" onClick={handlePrevious}>
             <IoPlaySkipBackSharp />
           </button>
-          <button title="Previous" onClick={skipBackward}>
+          <button
+            className="md:block hidden"
+            title="Previous"
+            onClick={skipBackward}>
             <IoPlayBackSharp />
           </button>
 
@@ -92,7 +95,10 @@ const Controls = ({
               <IoPlaySharp title="Play" />
             )}
           </button>
-          <button title="Next" onClick={skipForward}>
+          <button
+            className="md:block hidden"
+            title="Next"
+            onClick={skipForward}>
             <IoPlayForwardSharp />
           </button>
           <button title="Skip Forward" onClick={handleNext}>
@@ -101,7 +107,7 @@ const Controls = ({
         </div>
 
         {/* Volume Control */}
-        <label className="w-1/3 flex justify-evenly items-center slider">
+        <label className="w-1/3 md:flex hidden justify-evenly items-center slider">
           <input
             type="range"
             min={0}

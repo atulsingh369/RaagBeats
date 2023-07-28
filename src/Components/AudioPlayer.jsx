@@ -31,7 +31,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className="flex text-2xl font-semibold bg-primary text-white w-screen rounded-xl md:flex-row md:fixed md:bottom-2 md:h-32 flex-col items-center">
+      <div className="border-y-2 border-y-white flex text-2xl font-semibold bg-primary text-white w-screen rounded-xl fixed bottom-2 md:h-32 items-center">
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
