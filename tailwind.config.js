@@ -12,8 +12,6 @@ export default {
 			colors: {
 				primary: "#000b28",
 				secondary: "#040415",
-				tertiary: "#5604a1",
-				skills: "#33046d"
 			},
 			animation: {
 				'spin-slow': 'spin 15s linear infinite',
