@@ -18,14 +18,14 @@ const DisplayTrack = ({
   return (
     <div
       className={`w-full space-y-4 flex items-center justify-evenly ${
-        player ? "flex-col" : "my-5"
+        player ? "flex-col" : "my-2"
       }`}>
       {/* Track Img */}
       <div
         className={`items-center justify-center bg-no-repeat bg-cover bg-secondary ${
           !player
             ? "md:flex hidden w-fit h-fit animate-spin-slow rounded-full"
-            : "flex w-full md:h-96 rounded-box"
+            : "flex w-full  rounded-box"
         }`}
         style={{
           backgroundImage: "url(" + `${currentTrack.thumbnail}` + ")",
