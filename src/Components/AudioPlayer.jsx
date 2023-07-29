@@ -7,7 +7,15 @@ import ProgressBar from "./ProgressBar";
 
 import "./style.scss";
 
-const AudioPlayer = () => {
+const AudioPlayer = ({
+  player,
+  setHome,
+  setSearch,
+  setLike,
+  setPlayer,
+  setFolder,
+  setSetting,
+}) => {
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
@@ -29,9 +37,30 @@ const AudioPlayer = () => {
     setIsPlaying(true);
   };
 
+  const setArray = [
+    setHome,
+    setSearch,
+    setLike,
+    setPlayer,
+    setFolder,
+    setSetting,
+  ];
+  const handleClickIcons = (e) => {
+    for (let i = 0; i < setArray.length; ++i) {
+      e !== i && setArray[i](false);
+      setArray[e](true);
+    }
+  };
+
   return (
     <>
-      <div className="border-y-2 border-y-white flex text-2xl font-semibold bg-primary text-white w-screen rounded-xl fixed bottom-0 md:h-32 items-center">
+      <div
+        onClick={() => handleClickIcons(3)}
+        className={`flex text-2xl font-semibold bg-primary text-white items-center border-white ${
+          !player
+            ? "fixed bottom-0 w-screen md:h-32 border-y-2 rounded-xl"
+            : "flex-col border-2 p-2 rounded-box md:w-96"
+        }`}>
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
@@ -42,6 +71,7 @@ const AudioPlayer = () => {
             setDuration,
             progressBarRef,
             handleNext,
+            player,
           }}
         />
         <Controls
@@ -57,10 +87,11 @@ const AudioPlayer = () => {
             handleNext,
             isPlaying,
             setIsPlaying,
+            player,
           }}
         />
         <ProgressBar
-          {...{ progressBarRef, audioRef, timeProgress, duration }}
+          {...{ progressBarRef, audioRef, timeProgress, duration, player }}
         />
       </div>
     </>

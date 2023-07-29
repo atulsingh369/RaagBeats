@@ -1,11 +1,15 @@
+import { Fade } from "react-awesome-reveal";
+
 const Home = () => {
   return (
     <>
-      <div className="flex justify-center items-center bg-white rounded-xl text-black md:w-1/3 m-5">
-        Home
-      </div>
-      <div className="flex justify-center items-center bg-white rounded-xl text-black md:w-1/3 m-5">
-        Home
+      <div className="flex justify-evenly items-center flex-wrap w-full text-black">
+        <Fade direction="right">
+          <div className="bg-white rounded-xl">Home</div>
+        </Fade>
+        <Fade direction="right" delay="10">
+          <div className="bg-white rounded-xl">Home</div>
+        </Fade>	
       </div>
     </>
   );

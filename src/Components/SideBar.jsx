@@ -44,43 +44,43 @@ const SideBar = ({
           <IoHome
             title="Home"
             onClick={() => handleClickIcons(0)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              home && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              home && "text-icons"
             }`}
           />
           <IoSearch
             title="Search"
             onClick={() => handleClickIcons(1)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              search && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              search && "text-icons"
             }`}
           />
           <IoHeart
             title="Favourites"
             onClick={() => handleClickIcons(2)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              like && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              like && "text-icons"
             }`}
           />
           <IoMusicalNotes
             title="Player"
             onClick={() => handleClickIcons(3)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              player && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              player && "text-icons"
             }`}
           />
           <IoFolder
             title="Files"
             onClick={() => handleClickIcons(4)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              folder && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              folder && "text-icons"
             }`}
           />
           <IoSettingsSharp
             title="Settings"
             onClick={() => handleClickIcons(5)}
-            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-blue-400 ${
-              setting && "text-blue-400"
+            className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+              setting && "text-icons"
             }`}
           />
           <a

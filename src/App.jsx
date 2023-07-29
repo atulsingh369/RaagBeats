@@ -42,7 +42,9 @@ export default function App() {
             }}
           />
         </div>
-        <AudioPlayer />
+        <AudioPlayer
+          {...{ setHome, setSearch, setLike, setPlayer, setFolder, setSetting }}
+        />
       </React.StrictMode>
     </>
   );

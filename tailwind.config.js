@@ -12,6 +12,7 @@ export default {
 			colors: {
 				primary: "#000b28",
 				secondary: "#040415",
+				icons: "#60a5fa",
 			},
 			animation: {
 				'spin-slow': 'spin 15s linear infinite',

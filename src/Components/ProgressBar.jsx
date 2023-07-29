@@ -1,6 +1,12 @@
 import "./slider.css";
 
-const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
+const ProgressBar = ({
+  progressBarRef,
+  audioRef,
+  timeProgress,
+  duration,
+  player,
+}) => {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
@@ -18,16 +24,19 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
 
   return (
     <>
-      <div className="md:flex hidden w-full justify-evenly items-center mx-5">
-        <div>{formatTime(timeProgress)}</div>
+      <div
+        className={`flex w-full justify-evenly items-center mx-5 my-3 ${
+          !player && "md:flex hidden my-0"
+        }`}>
+        <div className="md:text-xl text-lg">{formatTime(timeProgress)}</div>
         <input
           ref={progressBarRef}
           type="range"
           defaultValue="0"
           onChange={handleProgressChange}
-          className="slide appearance-none w-2/3 h-2 bg-[#666666] cursor-pointer overflow-hidden rounded-xl transition-all duration-100"
+          className="slide appearance-none md:w-2/3 h-2 bg-[#666666] cursor-pointer overflow-hidden rounded-xl transition-all duration-100"
         />
-        <div>{formatTime(duration)}</div>
+        <div className="md:text-xl text-lg">{formatTime(duration)}</div>
       </div>
     </>
   );

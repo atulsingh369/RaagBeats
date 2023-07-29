@@ -22,8 +22,8 @@ const Controls = ({
   handleNext,
   isPlaying,
   setIsPlaying,
+  player,
 }) => {
-  
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
   const playAnimationRef = useRef();
@@ -77,12 +77,15 @@ const Controls = ({
     <>
       <div className="w-full flex justify-evenly items-center">
         {/* Audio Control */}
-        <div className="md:w-2/3 w-full flex justify-evenly items-center">
-          <button title="Skip Back" onClick={handlePrevious}>
+        <div
+          className={`md:w-2/3 w-full flex justify-evenly items-center ${
+            player && "md:w-full my-3"
+          }`}>
+          <button title="Skip Back"  onClick={handlePrevious}>
             <IoPlaySkipBackSharp />
           </button>
           <button
-            className="md:block hidden"
+            className={`${!player && "md:block hidden"}`}
             title="Previous"
             onClick={skipBackward}>
             <IoPlayBackSharp />
@@ -96,7 +99,7 @@ const Controls = ({
             )}
           </button>
           <button
-            className="md:block hidden"
+            className={`${!player && "md:block hidden"}`}
             title="Next"
             onClick={skipForward}>
             <IoPlayForwardSharp />
@@ -107,7 +110,10 @@ const Controls = ({
         </div>
 
         {/* Volume Control */}
-        <label className="w-1/3 md:flex hidden justify-evenly items-center slider">
+        <label
+          className={`w-1/3 md:flex hidden justify-evenly items-center slider ${
+            player && "md:hidden"
+          }`}>
           <input
             type="range"
             min={0}
