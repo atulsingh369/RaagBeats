@@ -2,8 +2,8 @@ import {
   IoHome,
   IoSearch,
   IoMusicalNotes,
-  IoFolder,
   IoHeart,
+  IoPerson,
   IoSettingsSharp,
 } from "react-icons/io5";
 
@@ -12,13 +12,13 @@ const SideBar = ({
   setSearch,
   setLike,
   setPlayer,
-  setFolder,
+  setUser,
   setSetting,
   home,
   search,
   like,
   player,
-  folder,
+  user,
   setting,
 }) => {
   const setArray = [
@@ -26,7 +26,7 @@ const SideBar = ({
     setSearch,
     setLike,
     setPlayer,
-    setFolder,
+    setUser,
     setSetting,
   ];
 
@@ -69,11 +69,11 @@ const SideBar = ({
               player && "text-icons"
             }`}
           />
-          <IoFolder
-            title="Files"
+          <IoPerson
+            title="User"
             onClick={() => handleClickIcons(4)}
             className={`text-2xl md:text-4xl md:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              folder && "text-icons"
+              user && "text-icons"
             }`}
           />
           <IoSettingsSharp

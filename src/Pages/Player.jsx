@@ -2,6 +2,8 @@ import AudioPlayer from "../Components/AudioPlayer";
 import { Fade } from "react-awesome-reveal";
 
 const Player = ({
+  favourites,
+  setFavourites,
   trackIndex,
   setTrackIndex,
   currentTrack,
@@ -24,6 +26,8 @@ const Player = ({
         <Fade direction="up">
           <AudioPlayer
             {...{
+              favourites,
+              setFavourites,
               player,
               trackIndex,
               setTrackIndex,

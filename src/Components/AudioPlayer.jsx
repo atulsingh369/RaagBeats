@@ -6,12 +6,14 @@ import ProgressBar from "./ProgressBar";
 import "./style.scss";
 
 const AudioPlayer = ({
+  favourites,
+  setFavourites,
   player,
   setHome,
   setSearch,
   setLike,
   setPlayer,
-  setFolder,
+  setUser,
   setSetting,
   trackIndex,
   setTrackIndex,
@@ -32,7 +34,7 @@ const AudioPlayer = ({
     setSearch,
     setLike,
     setPlayer,
-    setFolder,
+    setUser,
     setSetting,
   ];
   const handleClickIcons = (e) => {
@@ -57,6 +59,8 @@ const AudioPlayer = ({
           <div id="stars3"></div>
           <DisplayTrack
             {...{
+              favourites,
+              setFavourites,
               currentTrack,
               audioRef,
               setDuration,

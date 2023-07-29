@@ -9,9 +9,12 @@ export default function App() {
   const [search, setSearch] = useState(false);
   const [like, setLike] = useState(false);
   const [player, setPlayer] = useState(false);
-  const [folder, setFolder] = useState(false);
+  const [user, setUser] = useState(false);
   const [setting, setSetting] = useState(false);
 
+  const [favourites, setFavourites] = useState([]);
+
+  // Defining all controls here to initialize bith players at same time to make it sync with each other
   const [trackIndex, setTrackIndex] = useState(0);
   const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
@@ -32,7 +35,6 @@ export default function App() {
     }
     setIsPlaying(true);
   };
-	
 
   return (
     <>
@@ -44,23 +46,25 @@ export default function App() {
               search,
               like,
               player,
-              folder,
+              user,
               setting,
               setHome,
               setSearch,
               setLike,
               setPlayer,
-              setFolder,
+              setUser,
               setSetting,
             }}
           />
           <Content
             {...{
+              favourites,
+              setFavourites,
               home,
               search,
               like,
               player,
-              folder,
+              user,
               setting,
               trackIndex,
               setTrackIndex,
@@ -84,7 +88,7 @@ export default function App() {
             setSearch,
             setLike,
             setPlayer,
-            setFolder,
+            setUser,
             setSetting,
             trackIndex,
             setTrackIndex,

@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { BsMusicNoteBeamed } from "react-icons/bs";
 import { IoHeart } from "react-icons/io5";
 
 const DisplayTrack = ({
+  favourites,
+  setFavourites,
   currentTrack,
   audioRef,
   setDuration,
@@ -9,10 +12,19 @@ const DisplayTrack = ({
   handleNext,
   player,
 }) => {
+  const [like, setLike] = useState(false);
+
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;
+  };
+
+  const storeLike = () => {
+    setFavourites([...favourites, currentTrack.title]);
+    setLike(true);
+
+    console.log(favourites);
   };
 
   return (
@@ -46,7 +58,9 @@ const DisplayTrack = ({
             />
           </div>
         ) : (
-          <BsMusicNoteBeamed className="text-7xl text-white" />
+          <BsMusicNoteBeamed
+            className={`text-7xl text-white ${player && "md:my-36 my-20"}`}
+          />
         )}
       </div>
 
@@ -61,7 +75,12 @@ const DisplayTrack = ({
           </p>
         </div>
 
-        <IoHeart className={`md:text-3xl ${!player && "hidden"}`} />
+        <IoHeart
+          onClick={storeLike}
+          className={`md:text-3xl ${!player && "hidden"} ${
+            like && "text-icons"
+          }`}
+        />
       </div>
 
       <audio

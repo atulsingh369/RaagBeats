@@ -2,15 +2,17 @@ import Home from "../Pages/Home";
 import Search from "../Pages/Search";
 import Like from "../Pages/Like";
 import Player from "../Pages/Player";
-import Folder from "../Pages/Folder";
+import User from "../Pages/User";
 import Setting from "../Pages/Setting";
 
 const Content = ({
+  favourites,
+  setFavourites,
   home,
   search,
   like,
   player,
-  folder,
+  user,
   setting,
   trackIndex,
   setTrackIndex,
@@ -35,6 +37,8 @@ const Content = ({
         {player && (
           <Player
             {...{
+              favourites,
+              setFavourites,
               trackIndex,
               setTrackIndex,
               currentTrack,
@@ -51,7 +55,7 @@ const Content = ({
             }}
           />
         )}
-        {folder && <Folder />}
+        {user && <User />}
         {setting && <Setting />}
       </div>
     </>
