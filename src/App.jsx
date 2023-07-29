@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import AudioPlayer from "./Components/AudioPlayer";
 import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";
-import tracks from "./Data/tracks";
 
 export default function App() {
   const [home, setHome] = useState(true);
@@ -14,27 +13,27 @@ export default function App() {
 
   const [favourites, setFavourites] = useState([]);
 
-  // Defining all controls here to initialize bith players at same time to make it sync with each other
-  const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
-  const [timeProgress, setTimeProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
+  // Defining all controls here to initialize both players at same time to make it sync with each other
+  // const [trackIndex, setTrackIndex] = useState(0);
+  // const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+  // const [timeProgress, setTimeProgress] = useState(0);
+  // const [duration, setDuration] = useState(0);
+  // const [isPlaying, setIsPlaying] = useState(false);
 
-  const audioRef = useRef();
+  // const audioRef = useRef();
 
-  const progressBarRef = useRef();
+  // const progressBarRef = useRef();
 
-  const handleNext = () => {
-    if (trackIndex >= tracks.length - 1) {
-      setTrackIndex(0);
-      setCurrentTrack(tracks[0]);
-    } else {
-      setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(tracks[trackIndex + 1]);
-    }
-    setIsPlaying(true);
-  };
+  // const handleNext = () => {
+  //   if (trackIndex >= tracks.length - 1) {
+  //     setTrackIndex(0);
+  //     setCurrentTrack(tracks[0]);
+  //   } else {
+  //     setTrackIndex((prev) => prev + 1);
+  //     setCurrentTrack(tracks[trackIndex + 1]);
+  //   }
+  //   setIsPlaying(true);
+  // };
 
   return (
     <>
@@ -66,19 +65,6 @@ export default function App() {
               player,
               user,
               setting,
-              trackIndex,
-              setTrackIndex,
-              currentTrack,
-              setCurrentTrack,
-              timeProgress,
-              setTimeProgress,
-              duration,
-              setDuration,
-              isPlaying,
-              setIsPlaying,
-              audioRef,
-              progressBarRef,
-              handleNext,
             }}
           />
         </div>
@@ -90,19 +76,6 @@ export default function App() {
             setPlayer,
             setUser,
             setSetting,
-            trackIndex,
-            setTrackIndex,
-            currentTrack,
-            setCurrentTrack,
-            timeProgress,
-            setTimeProgress,
-            duration,
-            setDuration,
-            isPlaying,
-            setIsPlaying,
-            audioRef,
-            progressBarRef,
-            handleNext,
           }}
         />
       </React.StrictMode>

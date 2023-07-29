@@ -14,19 +14,6 @@ const Content = ({
   player,
   user,
   setting,
-  trackIndex,
-  setTrackIndex,
-  currentTrack,
-  setCurrentTrack,
-  timeProgress,
-  setTimeProgress,
-  duration,
-  setDuration,
-  isPlaying,
-  setIsPlaying,
-  audioRef,
-  progressBarRef,
-  handleNext,
 }) => {
   return (
     <>
@@ -39,19 +26,6 @@ const Content = ({
             {...{
               favourites,
               setFavourites,
-              trackIndex,
-              setTrackIndex,
-              currentTrack,
-              setCurrentTrack,
-              timeProgress,
-              setTimeProgress,
-              duration,
-              setDuration,
-              isPlaying,
-              setIsPlaying,
-              audioRef,
-              progressBarRef,
-              handleNext,
             }}
           />
         )}
