@@ -32,8 +32,10 @@ const DisplayTrack = ({
         }}>
         {currentTrack.thumbnail ? (
           <div
-            className={`flex w-full items-center backdrop-blur-md ${
-              !player ? "h-24 w-24 rounded-full" : "md:h-96 h-56 rounded-box"
+            className={`flex items-center backdrop-blur-md ${
+              !player
+                ? "h-24 w-24 rounded-full"
+                : "md:h-96 h-56 w-full rounded-box"
             }`}>
             <img
               className={`max-h-full min-w-full object-contain ${
