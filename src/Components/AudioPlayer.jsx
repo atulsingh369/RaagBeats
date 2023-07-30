@@ -38,26 +38,10 @@ const AudioPlayer = ({
     setIsPlaying(true);
   };
 
-  const setArray = [
-    setHome,
-    setSearch,
-    setLike,
-    setPlayer,
-    setUser,
-    setSetting,
-  ];
-  const handleClickIcons = (e) => {
-    for (let i = 0; i < setArray.length; ++i) {
-      e !== i && setArray[i](false);
-      setArray[e](true);
-    }
-  };
-
   return (
     <>
       <div className={`${!player && "fixed bottom-0"} bg-secondary`}>
         <div
-          onClick={() => handleClickIcons(3)}
           className={`flex text-2xl font-semibold bg-primary text-white items-center border-white ${
             !player
               ? "w-screen md:h-32 border-y-2 rounded-xl"
@@ -76,6 +60,12 @@ const AudioPlayer = ({
               progressBarRef,
               handleNext,
               player,
+              setHome,
+              setSearch,
+              setLike,
+              setPlayer,
+              setUser,
+              setSetting,
             }}
           />
           <Controls

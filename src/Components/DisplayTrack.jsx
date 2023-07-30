@@ -11,8 +11,14 @@ const DisplayTrack = ({
   progressBarRef,
   handleNext,
   player,
+  setHome,
+  setSearch,
+  setLike,
+  setPlayer,
+  setUser,
+  setSetting,
 }) => {
-  const [like, setLike] = useState(false);
+  const [heartList, setHeartList] = useState(false);
 
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
@@ -20,11 +26,26 @@ const DisplayTrack = ({
     progressBarRef.current.max = seconds;
   };
 
-  const storeLike = () => {
+  const storeHeartList = () => {
     setFavourites([...favourites, currentTrack.title]);
-    setLike(true);
+    setHeartList(true);
 
     console.log(favourites);
+  };
+
+  const setArray = [
+    setHome,
+    setSearch,
+    setLike,
+    setPlayer,
+    setUser,
+    setSetting,
+  ];
+  const handleClickIcons = (e) => {
+    for (let i = 0; i < setArray.length; ++i) {
+      e !== i && setArray[i](false);
+      setArray[e](true);
+    }
   };
 
   return (
@@ -34,7 +55,8 @@ const DisplayTrack = ({
       }`}>
       {/* Track Img */}
       <div
-        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary ${
+        onClick={() => handleClickIcons(3)}
+        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary cursor-pointer ${
           !player
             ? "md:flex hidden w-fit h-fit animate-spin-slow rounded-full"
             : "flex w-full  rounded-box"
@@ -76,9 +98,9 @@ const DisplayTrack = ({
         </div>
 
         <IoHeart
-          onClick={storeLike}
+          onClick={storeHeartList}
           className={`md:text-3xl ${!player && "hidden"} ${
-            like && "text-icons"
+            heartList && "text-icons"
           }`}
         />
       </div>

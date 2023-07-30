@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AudioPlayer from "./Components/AudioPlayer";
 import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";
+import { getAccessToken, getTrack } from "./axios";
 
 export default function App() {
   const [home, setHome] = useState(true);
@@ -12,6 +13,9 @@ export default function App() {
   const [setting, setSetting] = useState(false);
 
   const [favourites, setFavourites] = useState([]);
+
+  const [token, setToken] = useState("");
+  const [track, setTrack] = useState();
 
   // Defining all controls here to initialize both players at same time to make it sync with each other
   // const [trackIndex, setTrackIndex] = useState(0);
@@ -34,6 +38,13 @@ export default function App() {
   //   }
   //   setIsPlaying(true);
   // };
+
+  useEffect(() => {
+    setToken(getAccessToken());
+    setTrack(getTrack(token));
+  }, []);
+
+  console.log(track);
 
   return (
     <>
