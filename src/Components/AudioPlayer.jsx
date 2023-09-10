@@ -5,8 +5,6 @@ import ProgressBar from "./ProgressBar";
 import "./style.scss";
 
 const AudioPlayer = ({
-  favourites,
-  setFavourites,
   player,
   setHome,
   setSearch,
@@ -14,7 +12,6 @@ const AudioPlayer = ({
   setPlayer,
   setUser,
   setSetting,
-  currentTrack,
   audioRef,
   setDuration,
   progressBarRef,
@@ -27,8 +24,10 @@ const AudioPlayer = ({
   setCurrentTrack,
   isPlaying,
   setIsPlaying,
-	timeProgress,
-	data,
+  timeProgress,
+  data,
+  heartList,
+  storeHeartList,
 }) => {
   return (
     <>
@@ -44,9 +43,6 @@ const AudioPlayer = ({
           <div id="stars3"></div>
           <DisplayTrack
             {...{
-              favourites,
-              setFavourites,
-              currentTrack,
               audioRef,
               setDuration,
               progressBarRef,
@@ -57,8 +53,10 @@ const AudioPlayer = ({
               setLike,
               setPlayer,
               setUser,
-							setSetting,
-							data
+              setSetting,
+              data,
+              heartList,
+              storeHeartList,
             }}
           />
           <Controls
@@ -74,8 +72,8 @@ const AudioPlayer = ({
               setCurrentTrack,
               isPlaying,
               setIsPlaying,
-							player,
-							data
+              player,
+              data,
             }}
           />
           <ProgressBar

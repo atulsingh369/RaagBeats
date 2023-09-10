@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import AudioPlayer from "./Components/AudioPlayer";
 import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";
-import { getAccessToken, getTrack } from "./axios";
-import Search from "./Components/Search";
+// import Search from "./Components/Search";
 import axios from "axios";
 import tracks from "./Data/tracks";
 
@@ -31,6 +30,15 @@ export default function App() {
   const audioRef = useRef();
 
   const progressBarRef = useRef();
+
+  const [heartList, setHeartList] = useState(false);
+
+  const storeHeartList = () => {
+    data && setFavourites([...favourites, data.name]);
+    setHeartList(!heartList);
+
+    console.log(favourites);
+  };
 
   const handleNext = () => {
     if (trackIndex >= tracks.length - 1) {
@@ -93,15 +101,12 @@ export default function App() {
           />
           <Content
             {...{
-              favourites,
-              setFavourites,
               home,
               search,
               like,
               player,
               user,
               setting,
-              currentTrack,
               audioRef,
               setDuration,
               progressBarRef,
@@ -116,6 +121,8 @@ export default function App() {
               timeProgress,
               token,
               setData,
+              heartList,
+              storeHeartList,
             }}
           />
         </div>
@@ -127,21 +134,22 @@ export default function App() {
             setPlayer,
             setUser,
             setSetting,
-            currentTrack,
             audioRef,
             setDuration,
             progressBarRef,
             handleNext,
             duration,
             setTimeProgress,
+            tracks,
             trackIndex,
             setTrackIndex,
             setCurrentTrack,
             isPlaying,
             setIsPlaying,
             timeProgress,
-            token,
             data,
+            heartList,
+            storeHeartList,
           }}
         />
         {/* <Search {...{ token }} /> */}

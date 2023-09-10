@@ -1,11 +1,6 @@
-import { useState } from "react";
-import { BsMusicNoteBeamed } from "react-icons/bs";
 import { IoHeart } from "react-icons/io5";
 
 const DisplayTrack = ({
-  favourites,
-  setFavourites,
-  currentTrack,
   audioRef,
   setDuration,
   progressBarRef,
@@ -17,21 +12,14 @@ const DisplayTrack = ({
   setPlayer,
   setUser,
   setSetting,
-	data
+  data,
+  heartList,
+  storeHeartList,
 }) => {
-  const [heartList, setHeartList] = useState(false);
-
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;
-  };
-
-  const storeHeartList = () => {
-    setFavourites([...favourites, currentTrack.title]);
-    setHeartList(true);
-
-    console.log(favourites);
   };
 
   const setArray = [
@@ -63,36 +51,43 @@ const DisplayTrack = ({
             : "flex w-full  rounded-box"
         }`}
         style={{
-          backgroundImage: "url(" + `${data && data.album.images[0].url}` + ")",
+          backgroundImage:
+            "url(" +
+            `${
+              data
+                ? data.album.images[0].url
+                : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
+            }` +
+            ")",
         }}>
-        {data && data.album.images[0].url ? (
-          <div
-            className={`flex items-center backdrop-blur-md ${
-              !player
-                ? "h-24 w-24 rounded-full"
-                : "md:h-96 h-56 w-full rounded-box"
-            }`}>
-            <img
-              className={`max-h-full min-w-full object-contain ${
-                !player ? "rounded-full" : "rounded-box"
-              }`}
-              src={data && data.album.images[0].url}
-              alt="Thumbnail"
-            />
-          </div>
-        ) : (
-          <BsMusicNoteBeamed
-            className={`text-7xl text-white ${player && "md:my-36 my-20"}`}
+        <div
+          className={`flex items-center backdrop-blur-md ${
+            !player
+              ? "h-24 w-24 rounded-full"
+              : "md:h-96 h-56 w-full rounded-box"
+          }`}>
+          <img
+            className={`max-h-full min-w-full object-contain ${
+              !player ? "rounded-full" : "rounded-box"
+            }`}
+            src={
+              data
+                ? data.album.images[0].url
+                : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
+            }
+            alt="Thumbnail"
           />
-        )}
+        </div>
       </div>
 
       {/* Track Details */}
       <div className={`flex justify-evenly items-center ${player && "w-full"}`}>
         <div className="space-y-2">
-          <p className="md:text-2xl text-xl text-center">{data && data.name}</p>
+          <p className="md:text-2xl text-xl text-center">
+            {data ? data.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
+          </p>
           <p className="md:text-xl text-lg text-center">
-            {data && data.artists[0].name}
+            {data ? data.artists[0].name : "Narci"}
           </p>
         </div>
 
@@ -105,7 +100,11 @@ const DisplayTrack = ({
       </div>
 
       <audio
-        src={data && data.preview_url}
+        src={
+          data
+            ? data.preview_url
+            : "https://p.scdn.co/mp3-preview/42b2aab9dbc3f64e26b140b810632ccea3af00ed?cid=f2957fbb0ddb4e0b92ec7663ac1b76ab"
+        }
         ref={audioRef}
         onEnded={handleNext}
         onLoadedMetadata={onLoadedMetadata}
