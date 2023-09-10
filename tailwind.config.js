@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	daisyui: {
-		themes: ["garden"],
+		themes: ["synthwave"],
 	},
 	content: [
 		"./index.html",

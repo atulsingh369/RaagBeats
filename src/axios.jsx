@@ -31,13 +31,17 @@ export const getAccessToken = async () => {
 
 // Get Track for particular id with the access token
 export const getTrack = async (token) => {
-  const { data } = await axios.get(
-    "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbN",
-    {
-      headers: {
-        Authorization: `${token}`,
-      },
-    }
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbN",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -22,9 +22,9 @@ const Controls = ({
   handleNext,
   isPlaying,
   setIsPlaying,
-  player,
+	player,
 }) => {
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(100);
   const [muteVolume, setMuteVolume] = useState(false);
   const playAnimationRef = useRef();
 
@@ -41,11 +41,11 @@ const Controls = ({
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   const skipForward = () => {
-    audioRef.current.currentTime += 10;
+    audioRef.current.currentTime += 5;
   };
 
   const skipBackward = () => {
-    audioRef.current.currentTime -= 10;
+    audioRef.current.currentTime -= 5;
   };
 
   const handlePrevious = () => {

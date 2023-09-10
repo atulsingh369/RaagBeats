@@ -17,6 +17,7 @@ const DisplayTrack = ({
   setPlayer,
   setUser,
   setSetting,
+	data
 }) => {
   const [heartList, setHeartList] = useState(false);
 
@@ -62,9 +63,9 @@ const DisplayTrack = ({
             : "flex w-full  rounded-box"
         }`}
         style={{
-          backgroundImage: "url(" + `${currentTrack.thumbnail}` + ")",
+          backgroundImage: "url(" + `${data && data.album.images[0].url}` + ")",
         }}>
-        {currentTrack.thumbnail ? (
+        {data && data.album.images[0].url ? (
           <div
             className={`flex items-center backdrop-blur-md ${
               !player
@@ -75,7 +76,7 @@ const DisplayTrack = ({
               className={`max-h-full min-w-full object-contain ${
                 !player ? "rounded-full" : "rounded-box"
               }`}
-              src={currentTrack.thumbnail}
+              src={data && data.album.images[0].url}
               alt="Thumbnail"
             />
           </div>
@@ -89,11 +90,9 @@ const DisplayTrack = ({
       {/* Track Details */}
       <div className={`flex justify-evenly items-center ${player && "w-full"}`}>
         <div className="space-y-2">
-          <p className="md:text-2xl text-xl text-center">
-            {currentTrack.title}
-          </p>
+          <p className="md:text-2xl text-xl text-center">{data && data.name}</p>
           <p className="md:text-xl text-lg text-center">
-            {currentTrack.author}
+            {data && data.artists[0].name}
           </p>
         </div>
 
@@ -106,7 +105,7 @@ const DisplayTrack = ({
       </div>
 
       <audio
-        src={currentTrack.src}
+        src={data && data.preview_url}
         ref={audioRef}
         onEnded={handleNext}
         onLoadedMetadata={onLoadedMetadata}
