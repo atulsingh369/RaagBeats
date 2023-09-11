@@ -4,7 +4,6 @@ import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";
 // import Search from "./Components/Search";
 import axios from "axios";
-import tracks from "./Data/tracks";
 
 export default function App() {
   const [home, setHome] = useState(true);
@@ -14,15 +13,14 @@ export default function App() {
   const [user, setUser] = useState(false);
   const [setting, setSetting] = useState(false);
 
-  const [favourites, setFavourites] = useState([]);
+  const [favourites, setFavourites] = useState([]); // Store favourite Track
 
-  const [token, setToken] = useState("");
-  const [track, setTrack] = useState([]);
-  const [data, setData] = useState();
+  const [token, setToken] = useState(""); // Store Token to call API's
+  const [track, setTrack] = useState(); // Store Tracks came from API's
+  const [playList, setPlayList] = useState([]); // Store Playlist of Tracks came from API's
 
   // Defining all controls here to initialize both players at same time to make it sync with each other
   const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -34,21 +32,24 @@ export default function App() {
   const [heartList, setHeartList] = useState(false);
 
   const storeHeartList = () => {
-    data && setFavourites([...favourites, data.name]);
+    track && setFavourites([...favourites, track.name]);
     setHeartList(!heartList);
 
     console.log(favourites);
   };
 
   const handleNext = () => {
-    if (trackIndex >= tracks.length - 1) {
+    if (trackIndex >= playList.length - 1) {
       setTrackIndex(0);
-      setCurrentTrack(tracks[0]);
+      setTrack(playList[0]);
     } else {
       setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(tracks[trackIndex + 1]);
+      setTrack(playList[trackIndex + 1]);
     }
-    setIsPlaying(true);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 50);
   };
 
   const options = {
@@ -115,14 +116,14 @@ export default function App() {
               setTimeProgress,
               trackIndex,
               setTrackIndex,
-              setCurrentTrack,
               isPlaying,
               setIsPlaying,
               timeProgress,
               token,
-              setData,
+              setTrack,
               heartList,
               storeHeartList,
+              setPlayList,
             }}
           />
         </div>
@@ -140,16 +141,16 @@ export default function App() {
             handleNext,
             duration,
             setTimeProgress,
-            tracks,
+            playList,
             trackIndex,
             setTrackIndex,
-            setCurrentTrack,
             isPlaying,
             setIsPlaying,
             timeProgress,
-            data,
+            track,
             heartList,
             storeHeartList,
+            setTrack,
           }}
         />
         {/* <Search {...{ token }} /> */}

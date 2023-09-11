@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { searchTracks } from "../data";
 
-const Search = ({ token, setData, setIsPlaying, isPlaying, audioRef }) => {
+const Search = ({
+  token,
+  setTrack,
+  setIsPlaying,
+  isPlaying,
+  audioRef,
+  setPlayList,
+}) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]);
   const [list, setList] = useState([]);
@@ -11,7 +18,7 @@ const Search = ({ token, setData, setIsPlaying, isPlaying, audioRef }) => {
   const getTrack = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.spotify.com/v1/search?q=${search}&type=track&market=IN&limit=10`,
+        `https://api.spotify.com/v1/search?q=${search}&type=track&market=IN&limit=8`,
         {
           headers: {
             Authorization: token,
@@ -47,8 +54,11 @@ const Search = ({ token, setData, setIsPlaying, isPlaying, audioRef }) => {
   };
 
   const play = (item) => {
-    setData(item);
-    setIsPlaying(!isPlaying);
+    setTrack(item);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 50);
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
 
@@ -59,28 +69,54 @@ const Search = ({ token, setData, setIsPlaying, isPlaying, audioRef }) => {
 
   return (
     <>
-      <div className="justify-center bg-white items-center rounded-xl text-black p-5 md:w-1/3 m-5">
-        <input
-          type="search"
-          placeholder="Search Tracks..."
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full text-white p-5 outline-none rounded-2xl"
-        />
+      <div className="justify-center bg-white items-center rounded-xl text-black p-3 md:w-1/3 m-5">
+        <div className="flex justify-evenly bg-[#3b3b3b] rounded-box items-center">
+          {search && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              className="mx-2 hidden lg:block cursor-pointer"
+              title="Clear"
+              onClick={() => setSearch("")}
+              viewBox="0 0 24 24">
+              <path
+                fill="white"
+                d="m7.825 13l5.6 5.6L12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2H7.825Z"
+              />
+            </svg>
+          )}
+          <input
+            type="search"
+            placeholder="Search Tracks..."
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            className="w-full text-white p-5 outline-none rounded-2xl"
+          />
+        </div>
         {res.length > 0 && search
           ? res.map((item, index) => (
               <Fade delay={index} key={index}>
                 <div
-                  onClick={() => play(item)}
+                  onClick={() => {
+                    play(item);
+                    setPlayList(res);
+                  }}
                   title={item.name}
                   className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                  {/* <img
-                        src={item.album.images[2].url}
-                        className=" rounded-full object-cover"
-                        alt="logo"
-                      /> */}
-                  <p className="py-2 break-words text-xl text-secondary">
-                    {item.name}
-                  </p>
+                  <img
+                    src={item.album && item.album.images[2].url}
+                    className=" rounded-full object-cover"
+                    alt="logo"
+                  />
+                  <div>
+                    <p className="py-2 break-words text-xl text-secondary">
+                      {item.name}
+                    </p>
+                    <p className="break-words text-md text-secondary">
+                      {item.artists && item.artists[0].name}
+                    </p>
+                  </div>
                 </div>
               </Fade>
             ))
@@ -90,7 +126,10 @@ const Search = ({ token, setData, setIsPlaying, isPlaying, audioRef }) => {
                 index < 8 && (
                   <Fade delay={index} key={index}>
                     <div
-                      onClick={() => play(item)}
+                      onClick={() => {
+                        play(item);
+                        setPlayList(list);
+                      }}
                       title={item.name}
                       className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
                       <img

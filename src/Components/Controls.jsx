@@ -15,14 +15,14 @@ const Controls = ({
   progressBarRef,
   duration,
   setTimeProgress,
-  tracks,
+  playList,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   handleNext,
   isPlaying,
   setIsPlaying,
-	player,
+  player,
+  setTrack,
 }) => {
   const [volume, setVolume] = useState(100);
   const [muteVolume, setMuteVolume] = useState(false);
@@ -50,14 +50,17 @@ const Controls = ({
 
   const handlePrevious = () => {
     if (trackIndex === 0) {
-      let lastTrackIndex = tracks.length - 1;
+      let lastTrackIndex = playList.length - 1;
       setTrackIndex(lastTrackIndex);
-      setCurrentTrack(tracks[lastTrackIndex]);
+      setTrack(playList[lastTrackIndex]);
     } else {
       setTrackIndex((prev) => prev - 1);
-      setCurrentTrack(tracks[trackIndex - 1]);
+      setTrack(playList[trackIndex - 1]);
     }
-    setIsPlaying(true);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 50);
   };
 
   useEffect(() => {
@@ -81,7 +84,7 @@ const Controls = ({
           className={`md:w-2/3 w-full flex justify-evenly items-center ${
             player && "md:w-full my-3"
           }`}>
-          <button title="Skip Back"  onClick={handlePrevious}>
+          <button title="Skip Back" onClick={handlePrevious}>
             <IoPlaySkipBackSharp />
           </button>
           <button

@@ -18,16 +18,16 @@ const AudioPlayer = ({
   handleNext,
   duration,
   setTimeProgress,
-  tracks,
+  playList,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   isPlaying,
   setIsPlaying,
   timeProgress,
-  data,
+  track,
   heartList,
   storeHeartList,
+  setTrack,
 }) => {
   return (
     <>
@@ -54,7 +54,7 @@ const AudioPlayer = ({
               setPlayer,
               setUser,
               setSetting,
-              data,
+              track,
               heartList,
               storeHeartList,
             }}
@@ -65,15 +65,14 @@ const AudioPlayer = ({
               progressBarRef,
               duration,
               setTimeProgress,
-              tracks,
+              playList,
               trackIndex,
               setTrackIndex,
               handleNext,
-              setCurrentTrack,
               isPlaying,
               setIsPlaying,
               player,
-              data,
+              setTrack,
             }}
           />
           <ProgressBar
@@ -84,7 +83,7 @@ const AudioPlayer = ({
           className={`text-center text-lg md:text-xl font-semibold text-white ${
             player && "hidden"
           }`}>
-          Built with 💗 By Atul Singh
+          Built with ❤️ By Atul Singh
         </p>
       </div>
     </>

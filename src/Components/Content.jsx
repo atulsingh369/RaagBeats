@@ -20,14 +20,14 @@ const Content = ({
   setTimeProgress,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   isPlaying,
   setIsPlaying,
   timeProgress,
   token,
-  setData,
+  setTrack,
   heartList,
   storeHeartList,
+  setPlayList,
 }) => {
   return (
     <>
@@ -36,17 +36,27 @@ const Content = ({
           <Home
             {...{
               token,
-              setData,
+              setTrack,
               setIsPlaying,
               isPlaying,
               audioRef,
               heartList,
               storeHeartList,
+              setPlayList,
             }}
           />
         )}
         {search && (
-          <Search {...{ token, setData, setIsPlaying, isPlaying, audioRef }} />
+          <Search
+            {...{
+              token,
+              setTrack,
+              setIsPlaying,
+              isPlaying,
+              audioRef,
+              setPlayList,
+            }}
+          />
         )}
         {like && <Like />}
         {player && (
@@ -60,7 +70,6 @@ const Content = ({
               setTimeProgress,
               trackIndex,
               setTrackIndex,
-              setCurrentTrack,
               isPlaying,
               setIsPlaying,
               timeProgress,

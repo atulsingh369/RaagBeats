@@ -6,12 +6,13 @@ import { IoPlaySharp, IoPauseSharp, IoHeart } from "react-icons/io5";
 
 const Home = ({
   token,
-  setData,
+  setTrack,
   setIsPlaying,
   isPlaying,
   audioRef,
   heartList,
   storeHeartList,
+  setPlayList,
 }) => {
   const [res, setRes] = useState([]); // Store Album Tracks
   const [list, setList] = useState([]); // Store List Tracks
@@ -56,8 +57,11 @@ const Home = ({
   };
 
   const play = (item) => {
-    setData(item);
-    setIsPlaying(!isPlaying);
+    setTrack(item);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 50);
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
 
@@ -80,7 +84,10 @@ const Home = ({
                   index < 6 && (
                     <Fade delay={index * 10} key={index}>
                       <div
-                        onClick={() => play(item)}
+                        onClick={() => {
+                          play(item);
+                          setPlayList(res);
+                        }}
                         title={item.name.replace(/ *\([^]*\) */g, "")}
                         className="relative h-48 lg:h-56 rounded-box m-8 cursor-pointer">
                         <img
@@ -108,40 +115,48 @@ const Home = ({
               )}
           </div>
 
-          <div className="bg-white text-black p-5 rounded-box lg:mt-12 h-fit lg:mx-16 mx-5">
+          <div className="bg-white text-black p-3 lg:p-5 rounded-box lg:mt-12 h-fit lg:mx-16 mx-2">
             <p className="">Home</p>
-            <p className="text-2xl font-semibold mb-6">Songs out of Box</p>
+            <p className="text-2xl font-bold  mb-6">Top Hits</p>
             {list.length > 0 &&
               list.map(
                 (item, index) =>
                   index < 12 && (
                     <Fade delay={index} key={index}>
                       <div
-                        onClick={() => play(item)}
+                        onClick={() => {
+                          play(item);
+                          setPlayList(list);
+                        }}
                         title={item.name}
                         className="flex justify-stretch items-center space-x-6 mt-2 cursor-pointer">
-                        {isPlaying ? (
-                          <IoPauseSharp
-                            className="text-secondary text-3xl"
-                            title="Play"
-                          />
-                        ) : (
-                          <IoPlaySharp
-                            className="text-secondary text-3xl"
-                            title="Play"
-                          />
-                        )}
+                        <div>
+                          {isPlaying ? (
+                            <IoPauseSharp
+                              className="text-secondary text-xl lg:text-3xl"
+                              title="Play"
+                            />
+                          ) : (
+                            <IoPlaySharp
+                              className="text-secondary text-xl lg:text-3xl"
+                              title="Play"
+                            />
+                          )}
+                        </div>
                         <img
                           src={item.album.images[2].url}
-                          className=" rounded-full object-cover"
+                          className="rounded-full object-cover"
                           alt="logo"
                         />
                         <p className="py-2 break-words text-xl text-secondary">
                           {item.name.replace(/ *\([^]*\) */g, "")}
                         </p>
+
                         <IoHeart
                           onClick={storeHeartList}
-                          className={`md:text-3xl ${heartList && "text-icons"}`}
+                          className={`text-3xl hidden lg:block ${
+                            heartList && "text-icons"
+                          }`}
                         />
                       </div>
                     </Fade>

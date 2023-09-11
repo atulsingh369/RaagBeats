@@ -12,7 +12,7 @@ const DisplayTrack = ({
   setPlayer,
   setUser,
   setSetting,
-  data,
+  track,
   heartList,
   storeHeartList,
 }) => {
@@ -54,8 +54,8 @@ const DisplayTrack = ({
           backgroundImage:
             "url(" +
             `${
-              data
-                ? data.album.images[0].url
+              track
+                ? track.album.images[0].url
                 : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
             }` +
             ")",
@@ -71,8 +71,8 @@ const DisplayTrack = ({
               !player ? "rounded-full" : "rounded-box"
             }`}
             src={
-              data
-                ? data.album.images[0].url
+              track
+                ? track.album.images[0].url
                 : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
             }
             alt="Thumbnail"
@@ -84,10 +84,12 @@ const DisplayTrack = ({
       <div className={`flex justify-evenly items-center ${player && "w-full"}`}>
         <div className="space-y-2">
           <p className="md:text-2xl text-xl text-center">
-            {data ? data.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
+            {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
           </p>
           <p className="md:text-xl text-lg text-center">
-            {data ? data.artists[0].name : "Narci"}
+            {track
+              ? track.artists[0].name
+              : "Narci"}
           </p>
         </div>
 
@@ -101,8 +103,8 @@ const DisplayTrack = ({
 
       <audio
         src={
-          data
-            ? data.preview_url
+          track
+            ? track.preview_url
             : "https://p.scdn.co/mp3-preview/42b2aab9dbc3f64e26b140b810632ccea3af00ed?cid=f2957fbb0ddb4e0b92ec7663ac1b76ab"
         }
         ref={audioRef}
