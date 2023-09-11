@@ -45,7 +45,9 @@ const Content = ({
             }}
           />
         )}
-        {search && <Search {...{ token, setData, setIsPlaying }} />}
+        {search && (
+          <Search {...{ token, setData, setIsPlaying, isPlaying, audioRef }} />
+        )}
         {like && <Like />}
         {player && (
           <Player

@@ -28,7 +28,7 @@ const Home = ({
             },
           }
         );
-        setRes((res) => [...res, data]);
+        data.preview_url !== null && setRes((res) => [...res, data]);
       });
     } catch (error) {
       console.log(error);
@@ -46,8 +46,10 @@ const Home = ({
             },
           }
         );
-        setList((list) => [...list, data]);
+        data.preview_url !== null && setList((list) => [...list, data]);
       });
+      const newArray = [...new Map(list.map((v) => [v.name, v])).values()];
+      setList(newArray);
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +119,7 @@ const Home = ({
                       <div
                         onClick={() => play(item)}
                         title={item.name}
-                        className="flex justify-stretch items-center space-x-6 cursor-pointer">
+                        className="flex justify-stretch items-center space-x-6 mt-2 cursor-pointer">
                         {isPlaying ? (
                           <IoPauseSharp
                             className="text-secondary text-3xl"
