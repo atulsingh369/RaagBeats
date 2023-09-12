@@ -54,7 +54,7 @@ const DisplayTrack = ({
           backgroundImage:
             "url(" +
             `${
-              track
+              track && track.album
                 ? track.album.images[0].url
                 : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
             }` +
@@ -71,7 +71,7 @@ const DisplayTrack = ({
               !player ? "rounded-full" : "rounded-box"
             }`}
             src={
-              track
+              track && track.album
                 ? track.album.images[0].url
                 : "https://i.scdn.co/image/ab67616d0000b273460fe6f2972b44fc069c3fec"
             }
@@ -87,9 +87,7 @@ const DisplayTrack = ({
             {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
           </p>
           <p className="md:text-xl text-lg text-center">
-            {track
-              ? track.artists[0].name
-              : "Narci"}
+            {track ? track.artists[0].name : "Narci"}
           </p>
         </div>
 

@@ -146,7 +146,7 @@ const Home = ({
                         <img
                           src={item.album.images[2].url}
                           className="rounded-full object-cover"
-                          alt="logo"
+                          alt="avatar"
                         />
                         <p className="py-2 break-words text-xl text-secondary">
                           {item.name.replace(/ *\([^]*\) */g, "")}

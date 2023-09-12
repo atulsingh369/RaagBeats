@@ -2,6 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { searchAlbums, searchArtists, searchTracks } from "../data";
+import AlbumTracks from "../Components/AlbumTracks";
+import ArtistTracks from "../Components/ArtistTracks";
+import SearchAlbumArtist from "../Components/searchAlbumArtist";
 
 const Search = ({
   token,
@@ -15,9 +18,16 @@ const Search = ({
   const [res, setRes] = useState([]); // store search result
   const [list, setList] = useState([]); // store recommendation
   const [artists, setArtists] = useState([]); // store artists
+  const [artistTracks, setArtistTracks] = useState([]); // store tracks of artist
   const [album, setAlbum] = useState([]); // store albums
+  const [albumTracks, setAlbumTracks] = useState([]); // store tracks of album
   const [artistKey, setArtistKey] = useState(4); // store no of atists displayed
   const [albumKey, setAlbumKey] = useState(4); // store no of albums displayed
+  const [name, setName] = useState(""); // store name of artist/album
+  const [image, setImage] = useState(""); // store image of album tracks
+
+  const [albumDisp, setAlbumDisp] = useState(false);
+  const [artistDisp, setArtistDisp] = useState(false);
   const [loading, setLoading] = useState(true); // Set Loading
 
   // Get Search Result
@@ -91,8 +101,8 @@ const Search = ({
           },
         }
       );
-      console.log(data.tracks);
-      // setAlbum([album, ...data.tracks.items]);
+      setArtistTracks([artistTracks, ...data.tracks]);
+      setArtistDisp(true);
     } catch (error) {
       console.log(error);
     }
@@ -114,6 +124,24 @@ const Search = ({
       });
       const newArray = [...new Map(album.map((v) => [v.name, v])).values()];
       setAlbum(newArray);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Get Album Tracks
+  const getTracksAlbum = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `https://api.spotify.com/v1/albums/${id}/tracks?market=IN&limit=10`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setAlbumTracks([albumTracks, ...data.items]);
+      setAlbumDisp(true);
     } catch (error) {
       console.log(error);
     }
@@ -171,34 +199,40 @@ const Search = ({
 
             {/* Recommendation */}
             {res.length > 0 && search
-              ? res.map((item, index) => (
-                  <Fade delay={index} key={index}>
-                    <div
-                      onClick={() => {
-                        play(item);
-                        setPlayList(res);
-                      }}
-                      title={item.name}
-                      className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                      <img
-                        src={item.album && item.album.images[2].url}
-                        className=" rounded-full object-cover"
-                        alt="logo"
-                      />
-                      <div>
-                        <p className="py-2 break-words text-xl text-secondary">
-                          {item.name}
-                        </p>
-                        <p className="break-words text-lg text-secondary">
-                          {item.artists && item.artists[0].name}
-                        </p>
-                      </div>
-                    </div>
-                  </Fade>
-                ))
+              ? res.map(
+                  (item, index) =>
+                    item.preview_url !== null &&
+                    "name" in item && (
+                      <Fade delay={index} key={index}>
+                        <div
+                          onClick={() => {
+                            play(item);
+                            setPlayList(res);
+                          }}
+                          title={item.name}
+                          className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
+                          <img
+                            src={item.album && item.album.images[2].url}
+                            className=" rounded-full object-cover"
+                            alt="avatar"
+                          />
+                          <div>
+                            <p className="py-2 break-words text-xl text-secondary">
+                              {item.name}
+                            </p>
+                            <p className="break-words text-lg text-secondary">
+                              {item.artists && item.artists[0].name}
+                            </p>
+                          </div>
+                        </div>
+                      </Fade>
+                    )
+                )
               : list.length > 0 &&
                 list.map(
                   (item, index) =>
+                    item.preview_url !== null &&
+                    "name" in item &&
                     index < 8 && (
                       <Fade delay={index} key={index}>
                         {/* Search Result */}
@@ -212,7 +246,7 @@ const Search = ({
                           <img
                             src={item.album.images[2].url}
                             className=" rounded-full object-cover"
-                            alt="logo"
+                            alt="avatar"
                           />
                           <p className="py-2 break-words text-xl text-secondary">
                             {item.name.replace(/ *\([^]*\) */g, "")}
@@ -224,114 +258,41 @@ const Search = ({
           </div>
 
           <div className="px-3 items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
-            {/* Top Artist */}
-            <div>
-              <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
-                Top Artists
-              </p>
-
-              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-                {/* Artists */}
-                {artists.length > 0 &&
-                  artists.map(
-                    (item, index) =>
-                      index < searchArtists.length &&
-                      index < artistKey && (
-                        <Fade delay={index * 10} key={index}>
-                          <div
-                            onClick={() => getArtistTrack(item.id)}
-                            title={item.name}
-                            className="flex flex-col justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                            <img
-                              src={item.images && item.images[0].url}
-                              className="w-24 rounded-full object-cover"
-                              alt="logo"
-                            />
-                            <div>
-                              <p className="py-2 font-semibold text-center break-words text-xl text-secondary">
-                                {item.name}
-                              </p>
-                            </div>
-                          </div>
-                        </Fade>
-                      )
-                  )}
-                {/* More */}
-                {artistKey < searchArtists.length && (
-                  <p className="py-1 lg:col-span-4 md:col-span-3 col-span-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
-                      className="mx-auto font-bold animate-bounce cursor-pointer"
-                      onClick={() => setArtistKey(artistKey + 4)}
-                      viewBox="0 0 15 15">
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="square"
-                        d="m14 5l-6.5 7L1 5"
-                      />
-                    </svg>
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Top Albums */}
-            <div>
-              <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
-                Top Albums
-              </p>
-
-              <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-                {/* Albums */}
-                {album.length > 0 &&
-                  album.map(
-                    (item, index) =>
-                      index < searchAlbums.length &&
-                      index < albumKey && (
-                        <Fade delay={index * 10} key={index}>
-                          <div
-                            // onClick={() => getAlbums(item.id)}
-                            title={item.name.replace(/ *\([^]*\) */g, "")}
-                            className="flex flex-col justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                            <img
-                              src={item.images && item.images[0].url}
-                              className="w-24 rounded-full object-cover"
-                              alt="logo"
-                            />
-                            <div>
-                              <p className="py-2 font-semibold text-center break-words text-xl text-secondary">
-                                {item.name.replace(/ *\([^]*\) */g, "")}
-                              </p>
-                            </div>
-                          </div>
-                        </Fade>
-                      )
-                  )}
-
-                {/* More */}
-                {albumKey < searchAlbums.length && (
-                  <p className="py-1 lg:col-span-4 md:col-span-3 col-span-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
-                      className="mx-auto font-bold animate-bounce cursor-pointer"
-                      onClick={() => setAlbumKey(albumKey + 4)}
-                      viewBox="0 0 15 15">
-                      <path
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="square"
-                        d="m14 5l-6.5 7L1 5"
-                      />
-                    </svg>
-                  </p>
-                )}
-              </div>
-            </div>
+            {!artistDisp && !albumDisp ? (
+              <SearchAlbumArtist
+                {...{
+                  artists,
+                  searchArtists,
+                  artistKey,
+                  getArtistTrack,
+                  setArtistKey,
+                  album,
+                  searchAlbums,
+                  albumKey,
+                  getTracksAlbum,
+                  setAlbumKey,
+                  setName,
+                  setImage,
+                }}
+              />
+            ) : artistDisp ? (
+              <ArtistTracks
+                {...{ setArtistDisp, artistTracks, play, setPlayList, name }}
+              />
+            ) : (
+              albumDisp && (
+                <AlbumTracks
+                  {...{
+                    setAlbumDisp,
+                    albumTracks,
+                    play,
+                    setPlayList,
+                    name,
+                    image,
+                  }}
+                />
+              )
+            )}
           </div>
         </>
       )}
