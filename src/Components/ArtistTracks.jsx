@@ -1,4 +1,5 @@
 import { Fade } from "react-awesome-reveal";
+import { IoHeart } from "react-icons/io5";
 
 const ArtistTracks = ({
   setArtistDisp,
@@ -6,6 +7,8 @@ const ArtistTracks = ({
   play,
   setPlayList,
   name,
+  storeHeartList,
+  heartList,
 }) => {
   return (
     <>
@@ -55,6 +58,12 @@ const ArtistTracks = ({
                       {item.artists && item.artists[0].name}
                     </p>
                   </div>
+                  <IoHeart
+                    onClick={storeHeartList}
+                    className={`text-3xl hidden lg:block ${
+                      heartList && "text-icons"
+                    }`}
+                  />
                 </div>
               </Fade>
             )

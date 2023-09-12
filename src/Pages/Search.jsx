@@ -13,6 +13,8 @@ const Search = ({
   isPlaying,
   audioRef,
   setPlayList,
+  storeHeartList,
+  heartList,
 }) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]); // store search result
@@ -34,7 +36,7 @@ const Search = ({
   const getTrack = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.spotify.com/v1/search?q=${search}&type=artist%2Ctrack&market=IN&limit=8`,
+        `https://api.spotify.com/v1/search?q=${search}&type=album%2Cartist%2Ctrack&market=IN&limit=8`,
         {
           headers: {
             Authorization: token,
@@ -277,7 +279,15 @@ const Search = ({
               />
             ) : artistDisp ? (
               <ArtistTracks
-                {...{ setArtistDisp, artistTracks, play, setPlayList, name }}
+                {...{
+                  setArtistDisp,
+                  artistTracks,
+                  play,
+                  setPlayList,
+                  name,
+                  storeHeartList,
+                  heartList,
+                }}
               />
             ) : (
               albumDisp && (
@@ -289,6 +299,8 @@ const Search = ({
                     setPlayList,
                     name,
                     image,
+                    storeHeartList,
+                    heartList,
                   }}
                 />
               )

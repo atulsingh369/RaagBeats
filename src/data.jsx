@@ -36,13 +36,13 @@ export const searchTracks = [
 ];
 
 export const searchArtists = [
+  "3b9iVRjKkiC4oIHXB7pbzJ", // Narci
   "0y59o4v8uw5crbN9M3JiL1", // Badshah
   "1tqysapcCh1lWEAc9dIFpa", // Jubin Nautiyal
   "5UdFr0GeO7jKIaNIJgwB36", // Raftaar
   "4YRxDV8wJFPHPTeXepOstw", // Arjit Singh
   "6WOdPJmexxFINcKMkP2jMG", // Sachet
   "2GoeZ0qOTt6kjsWW4eA6LS", // Darshan Rawal
-  "3b9iVRjKkiC4oIHXB7pbzJ", // Narci
   "5NHm4TU5Twz7owibYxJfFU", // King
   "1E6arsXf5Fgsnv9YpSzjpE", // Parampara
   "5f4QpKfy7ptCHwTqspnSJI", // Neha kakkar

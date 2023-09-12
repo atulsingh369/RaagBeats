@@ -55,6 +55,8 @@ const Content = ({
               isPlaying,
               audioRef,
               setPlayList,
+              storeHeartList,
+              heartList,
             }}
           />
         )}
