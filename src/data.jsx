@@ -33,4 +33,31 @@ export const searchTracks = [
   "70MVLulHguwdhGo7100hsU", // Ik Lamha
 ];
 
-// https://open.spotify.com/track/30c8d0Mq1UDtL5aKftCubB?si=372b9db470ee4cb1
+export const searchArtists = [
+  "4YRxDV8wJFPHPTeXepOstw", // Arjit Singh
+  "0y59o4v8uw5crbN9M3JiL1", // Badshah
+  "1tqysapcCh1lWEAc9dIFpa", // Jubin Nautiyal
+  "6WOdPJmexxFINcKMkP2jMG", // Sachet
+  "1E6arsXf5Fgsnv9YpSzjpE", // Parampara
+  "2GoeZ0qOTt6kjsWW4eA6LS", // Darshan Rawal
+  "5f4QpKfy7ptCHwTqspnSJI", // Neha kakkar
+  "5NHm4TU5Twz7owibYxJfFU", // King
+  "1mYsTxnqsietFxj1OgoGbG", // A R Rehman
+  "0oOet2f43PA68X5RxKobEy", // Sherya Ghosal
+  "2oSONSC9zQ4UonDKnLqksx", // Atif Aslam
+  "2kfi47LWmlXzQ3p3kWonfQ", // Madhur Sharma
+  "1mBydYMVBECdDmMfE2sEUO", // Sachin Jigar
+  "6LEG9Ld1aLImEFEVHdWNSB", // A P Dhillon
+  "4f7KfxeHq9BiylGmyXepGt", // Tanishq
+  "5TF8wtgrYplT0tJFjoV9Me", // Pranjal Dahiya
+];
+
+export const searchAlbums = [
+  "1MnrM38f3cXEAGSciUNXN8", // Sandeep Bhaiya
+  "78am1yKrHJ8pPJ5djm4XvX", // Cubicles
+  "78am1yKrHJ8pPJ5djm4XvX", // Cubicles
+  "78am1yKrHJ8pPJ5djm4XvX", // Cubicles
+  "78am1yKrHJ8pPJ5djm4XvX", // Cubicles
+];
+
+// https://open.spotify.com/album/78am1yKrHJ8pPJ5djm4XvX?si=074e5997bb4e47bf

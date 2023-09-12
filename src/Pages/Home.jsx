@@ -76,7 +76,7 @@ const Home = ({
       {loading ? (
         <div>Loading..</div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-screen">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {res.length > 0 &&
               res.map(
@@ -115,7 +115,7 @@ const Home = ({
               )}
           </div>
 
-          <div className="bg-white text-black p-3 lg:p-5 rounded-box lg:mt-12 h-fit lg:mx-16 mx-2">
+          <div className="bg-white text-black p-3 lg:p-5 rounded-box lg:mt-12 lg:mx-16 mx-2 lg:h-5/6 overflow-y-scroll">
             <p className="">Home</p>
             <p className="text-2xl font-bold  mb-6">Top Hits</p>
             {list.length > 0 &&
