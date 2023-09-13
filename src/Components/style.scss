@@ -10,14 +10,14 @@
   @return unquote($value);
 }
 
-$shadows-small: multiple-box-shadow(900);
-$shadows-medium: multiple-box-shadow(500);
-$shadows-big: multiple-box-shadow(300);
-
+$shadows-small: multiple-box-shadow(1000);
+$shadows-medium: multiple-box-shadow(800);
+$shadows-big: multiple-box-shadow(400);
 
 #stars {
   width: 1.2px;
   height: 1.2px;
+  border-radius: 50%;
   background: transparent;
   box-shadow: $shadows-small;
   animation: animStar 50s linear infinite;
@@ -33,6 +33,7 @@ $shadows-big: multiple-box-shadow(300);
 #stars2 {
   width: 2.2px;
   height: 2.2px;
+  border-radius: 50%;
   background: transparent;
   box-shadow: $shadows-medium;
   animation: animStar 100s linear infinite;
@@ -48,6 +49,7 @@ $shadows-big: multiple-box-shadow(300);
 #stars3 {
   width: 3.2px;
   height: 3.2px;
+  border-radius: 50%;
   background: transparent;
   box-shadow: $shadows-big;
   animation: animStar 150s linear infinite;

@@ -100,17 +100,6 @@ const Home = ({
                           className="max-h-full min-w-full rounded-box object-cover"
                           alt="banner"
                         />
-                        {/* {isPlaying ? (
-                          <IoPauseSharp
-                            className="absolute bg-primary rounded-full p-3 left-[35%] top-[35%] text-6xl"
-                            title="Play"
-                          />
-                        ) : (
-                          <IoPlaySharp
-                            className="absolute bg-primary rounded-full p-3 left-[35%] top-[35%] text-6xl"
-                            title="Play"
-                          />
-                        )} */}
                         <p className="absolute bottom-6 py-2 text-xl w-full text-center bg-secondary">
                           {item.name.replace(/ *\([^]*\) */g, "")}
                         </p>
@@ -122,14 +111,16 @@ const Home = ({
 
           {/* Tracks */}
           <div className="px-3 mt-5 items-center bg-white rounded-xl text-black lg:h-5/6 h-1/2 lg:w-3/4 lg:mx-16 mx-2 overflow-y-scroll transition-all ease-in-out duration-300">
-            <div className="sticky top-0 z-10 bg-white py-3">
-              <img
-                src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
-                alt="Welcome To RaagBeats"
-                className="rounded-box"
-              />
-              <p className="py-3 text-2xl font-bold">Top Hits</p>
-            </div>
+            <Fade delay={10}>
+              <div className="sticky top-0 z-10 bg-white py-3">
+                <img
+                  src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
+                  alt="Welcome To RaagBeats"
+                  className="rounded-box"
+                />
+                <p className="py-3 text-2xl font-bold">Top Hits</p>
+              </div>
+            </Fade>
 
             {list.length > 0 &&
               list.map(
