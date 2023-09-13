@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { homeAlbum, homeTracks } from "../data";
 import { IoHeart } from "react-icons/io5";
+import HomeLoader from "../Components/Loaders/HomeLoader";
 
 const Home = ({
   token,
@@ -69,17 +70,19 @@ const Home = ({
   useEffect(() => {
     getTrack();
     getList();
-    (token !== "") & setLoading(false);
+    setTimeout(() => {
+      token !== "" && setLoading(false);
+    }, 3500);
   }, [token]);
 
   return (
     <>
       {loading ? (
-        <div>Loading..</div>
+        <HomeLoader />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-screen">
-          {/* Album */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Album Desktop */}
+          <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-4 lg:mx-16 mx-2 hidden">
             {res.length > 0 &&
               res.map(
                 (item, index) =>
@@ -118,9 +121,16 @@ const Home = ({
           </div>
 
           {/* Tracks */}
-          <div className="bg-white text-black p-3 lg:p-5 rounded-box lg:mt-12 lg:mx-16 mx-2 lg:h-5/6 overflow-y-scroll">
-            <p className="">Home</p>
-            <p className="text-2xl font-bold mb-6">Top Hits</p>
+          <div className="px-3 mt-5 items-center bg-white rounded-xl text-black lg:h-5/6 h-1/2 lg:w-3/4 lg:mx-16 mx-2 overflow-y-scroll transition-all ease-in-out duration-300">
+            <div className="sticky top-0 z-10 bg-white py-3">
+              <img
+                src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
+                alt="Welcome To RaagBeats"
+                className="rounded-box"
+              />
+              <p className="py-3 text-2xl font-bold">Top Hits</p>
+            </div>
+
             {list.length > 0 &&
               list.map(
                 (item, index) =>
@@ -173,6 +183,34 @@ const Home = ({
                             }`}
                           />
                         </div>
+                      </div>
+                    </Fade>
+                  )
+              )}
+          </div>
+
+          {/* Album Mobile */}
+          <div className="lg:hidden grid grid-cols-1 lg:grid-cols-2 gap-4 -mt-96">
+            {res.length > 0 &&
+              res.map(
+                (item, index) =>
+                  index < 6 && (
+                    <Fade delay={index * 10} key={index}>
+                      <div
+                        onClick={() => {
+                          play(item);
+                          setPlayList(res);
+                        }}
+                        title={item.name.replace(/ *\([^]*\) */g, "")}
+                        className="relative h-48 lg:h-56 rounded-box m-8 cursor-pointer">
+                        <img
+                          src={item.album.images[0].url}
+                          className="max-h-full min-w-full rounded-box object-cover"
+                          alt="banner"
+                        />
+                        <p className="absolute bottom-6 py-2 text-xl w-full text-center bg-secondary">
+                          {item.name.replace(/ *\([^]*\) */g, "")}
+                        </p>
                       </div>
                     </Fade>
                   )

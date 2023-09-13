@@ -5,6 +5,7 @@ import { searchAlbums, searchArtists, searchTracks } from "../data";
 import AlbumTracks from "../Components/AlbumTracks";
 import ArtistTracks from "../Components/ArtistTracks";
 import SearchAlbumArtist from "../Components/searchAlbumArtist";
+import { IoHeart } from "react-icons/io5";
 
 const Search = ({
   token,
@@ -172,7 +173,7 @@ const Search = ({
         <div>Loading..</div>
       ) : (
         <>
-          <div className="p-3 items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+          <div className="p-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {/* Search Bar */}
             <div className="flex sticky top-0 z-10 justify-evenly bg-[#3b3b3b] rounded-box items-center">
               {search && (
@@ -207,24 +208,45 @@ const Search = ({
                     "name" in item && (
                       <Fade delay={index} key={index}>
                         <div
-                          onClick={() => {
-                            play(item);
-                            setPlayList(res);
-                          }}
                           title={item.name}
-                          className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                          <img
-                            src={item.album && item.album.images[2].url}
-                            className=" rounded-full object-cover"
-                            alt="avatar"
-                          />
-                          <div>
-                            <p className="py-2 break-words text-xl text-secondary">
-                              {item.name}
-                            </p>
-                            <p className="break-words text-lg text-secondary">
-                              {item.artists && item.artists[0].name}
-                            </p>
+                          className="flex justify-between items-center">
+                          <div
+                            onClick={() => {
+                              play(item);
+                              setPlayList(albumTracks);
+                            }}
+                            title={item.name}
+                            className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
+                            <img
+                              src={item.album && item.album.images[2].url}
+                              className=" rounded-full object-cover"
+                              alt="avatar"
+                            />
+                            <div>
+                              <p className="py-2 break-words text-xl text-secondary">
+                                {item.name}
+                              </p>
+                              <p className="break-words text-lg text-secondary">
+                                {item.artists && item.artists[0].name}
+                              </p>
+                            </div>
+                          </div>
+                          {/* Heart */}
+                          <div
+                            className={`${
+                              favourites.length > 0 &&
+                              favourites.forEach(
+                                (id) => item.id == id && (item.heart = true)
+                              )
+                            }`}>
+                            <IoHeart
+                              onClick={() => storeHeartList(item)}
+                              className={`text-3xl cursor-pointer ${
+                                item.heart == true
+                                  ? "text-heart"
+                                  : "text-secondary"
+                              }`}
+                            />
                           </div>
                         </div>
                       </Fade>
@@ -239,27 +261,48 @@ const Search = ({
                       <Fade delay={index} key={index}>
                         {/* Search Result */}
                         <div
-                          onClick={() => {
-                            play(item);
-                            setPlayList(list);
-                          }}
                           title={item.name}
-                          className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                          <img
-                            src={item.album.images[2].url}
-                            className=" rounded-full object-cover"
-                            alt="avatar"
-                          />
-                          <p className="py-2 break-words text-xl text-secondary">
-                            {item.name.replace(/ *\([^]*\) */g, "")}
-                          </p>
+                          className="flex justify-between items-center">
+                          <div
+                            onClick={() => {
+                              play(item);
+                              setPlayList(albumTracks);
+                            }}
+                            title={item.name}
+                            className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
+                            <img
+                              src={item.album.images[2].url}
+                              className=" rounded-full object-cover"
+                              alt="avatar"
+                            />
+                            <p className="py-2 break-words text-xl text-secondary">
+                              {item.name.replace(/ *\([^]*\) */g, "")}
+                            </p>
+                          </div>
+                          {/* Heart */}
+                          <div
+                            className={`${
+                              favourites.length > 0 &&
+                              favourites.forEach(
+                                (id) => item.id == id && (item.heart = true)
+                              )
+                            }`}>
+                            <IoHeart
+                              onClick={() => storeHeartList(item)}
+                              className={`text-3xl cursor-pointer ${
+                                item.heart == true
+                                  ? "text-heart"
+                                  : "text-secondary"
+                              }`}
+                            />
+                          </div>
                         </div>
                       </Fade>
                     )
                 )}
           </div>
 
-          <div className="px-3 items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+          <div className="px-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {!artistDisp && !albumDisp ? (
               <SearchAlbumArtist
                 {...{

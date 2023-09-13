@@ -66,6 +66,7 @@ const ArtistTracks = ({
                       </p>
                     </div>
                   </div>
+                  {/* Heart */}
                   <div
                     className={`${
                       favourites.length > 0 &&

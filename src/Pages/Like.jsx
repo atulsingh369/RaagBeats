@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { IoHeart } from "react-icons/io5";
+import LikeLoader from "../Components/Loaders/LikeLoader";
+import { homeTracks } from "../data";
 
 const Like = ({
   token,
@@ -15,6 +17,7 @@ const Like = ({
   storeHeartList,
 }) => {
   const [res, setRes] = useState([]);
+  const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getLikedTracks = () => {
@@ -38,6 +41,27 @@ const Like = ({
     }
   };
 
+  const getLikedList = async () => {
+    try {
+      homeTracks.forEach(async (item) => {
+        const { data } = await axios.get(
+          `https://api.spotify.com/v1/tracks/${item}`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        data.preview_url !== null && setList((list) => [...list, data]);
+      });
+      const newArray = [...new Map(list.map((v) => [v.name, v])).values()];
+      setList(newArray);
+      list.forEach((item) => (item.heart = false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const play = (item) => {
     setTrack(item);
     setIsPlaying(false);
@@ -49,77 +73,129 @@ const Like = ({
 
   useEffect(() => {
     getLikedTracks();
-    (token !== "") & setLoading(false);
+    getLikedList();
+    setTimeout(() => {
+      token !== "" && setLoading(false);
+    }, 2000);
   }, [token]);
 
   return (
     <>
-      {res.length > 0 ? (
-        <div className="p-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
-          <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
-            Liked Songs
-          </p>
-          {/* Artist Tracks */}
-          {res.length > 0 &&
-            res.map(
-              (item, index) =>
-                item.preview_url !== null &&
-                "name" in item && (
-                  <Fade delay={index} key={index}>
-                    <div
-                      title={item.name}
-                      className="flex justify-between items-center">
+      {loading ? (
+        <LikeLoader />
+      ) : (
+        <>
+          <div
+            className={`px-3 items-center bg-white rounded-box text-black lg:w-1/3 m-5 overflow-y-scroll transition-all ease-in-out duration-300 ${
+              res.length > 0 ? "h-5/6" : "h-fit"
+            }`}>
+            <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
+              Liked Tracks
+            </p>
+            {/* Artist Tracks */}
+            {res.length > 0 ? (
+              res.length > 0 &&
+              res.map(
+                (item, index) =>
+                  item.preview_url !== null &&
+                  "name" in item &&
+                  index < favourites.length && (
+                    <Fade delay={index} key={index}>
                       <div
-                        onClick={() => {
-                          play(item);
-                          setPlayList(res);
-                        }}
                         title={item.name}
-                        className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                        <img
-                          src={item.album && item.album.images[2].url}
-                          className=" rounded-full object-cover"
-                          alt="avatar"
-                        />
-                        <div>
-                          <p className="py-2 break-words text-xl text-secondary">
-                            {item.name}
-                          </p>
-                          <p className="break-words text-lg text-secondary">
-                            {item.artists && item.artists[0].name}
-                          </p>
+                        className="flex justify-between items-center">
+                        <div
+                          onClick={() => {
+                            play(item);
+                            setPlayList(res);
+                          }}
+                          title={item.name}
+                          className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
+                          <img
+                            src={item.album && item.album.images[2].url}
+                            className=" rounded-full object-cover"
+                            alt="avatar"
+                          />
+                          <div>
+                            <p className="py-2 break-words text-xl text-secondary">
+                              {item.name}
+                            </p>
+                            <p className="break-words text-lg text-secondary">
+                              {item.artists && item.artists[0].name}
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          className={`${
+                            favourites.length > 0 &&
+                            favourites.forEach(
+                              (id) => item.id == id && (item.heart = true)
+                            )
+                          }`}>
+                          <IoHeart
+                            onClick={() => storeHeartList(item)}
+                            className={`text-3xl cursor-pointer ${
+                              item.heart == true
+                                ? "text-heart"
+                                : "text-secondary"
+                            }`}
+                          />
                         </div>
                       </div>
-                      <div
-                        className={`${
-                          favourites.length > 0 &&
-                          favourites.forEach(
-                            (id) => item.id == id && (item.heart = true)
-                          )
-                        }`}>
-                        <IoHeart
-                          onClick={() => storeHeartList(item)}
-                          className={`text-3xl cursor-pointer ${
-                            item.heart == true ? "text-heart" : "text-secondary"
-                          }`}
-                        />
-                      </div>
-                    </div>
-                  </Fade>
-                )
+                    </Fade>
+                  )
+              )
+            ) : (
+              <img
+                src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/output-onlinegiftools.gif?updatedAt=1694634763651"
+                alt="Add Song"
+              />
             )}
-        </div>
-      ) : (
-        <div className="lg:w-1/3 w-full transition-all ease-in-out duration-300">
-          <img
-            src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/Like%20Avatar.png?updatedAt=1694616580612"
-            alt="Add Song"
-          />
-        </div>
+          </div>
+
+          {/* Editor Choice */}
+          <div className="px-3 items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+            <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
+              Editor Choice
+            </p>
+            {list.length > 0 &&
+              list.map(
+                (item, index) =>
+                  index < 12 && (
+                    <Fade delay={index} key={index}>
+                      <div
+                        title={item.name}
+                        className="flex justify-between items-center">
+                        <div
+                          className="flex justify-stretch items-center space-x-6 mt-2 cursor-pointer"
+                          onClick={() => {
+                            play(item);
+                            setPlayList(list);
+                          }}>
+                          <img
+                            src={item.album.images[2].url}
+                            className="rounded-full object-cover"
+                            alt="avatar"
+                          />
+                          <div>
+                            <p className="py-2 break-words text-xl text-secondary">
+                              {item.name}
+                            </p>
+                            <p className="break-words text-lg text-secondary hidden lg:block">
+                              {item.artists && item.artists[0].name}
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          <IoHeart className="text-3xl text-heart" />
+                        </div>
+                      </div>
+                    </Fade>
+                  )
+              )}
+          </div>
+        </>
       )}
-      <div className="flex justify-center items-center bg-white rounded-xl text-black md:w-1/3 m-5">
-        Like
-      </div>
     </>
   );
 };
