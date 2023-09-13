@@ -25,7 +25,6 @@ const AudioPlayer = ({
   setIsPlaying,
   timeProgress,
   track,
-  heartList,
   storeHeartList,
   setTrack,
 }) => {
@@ -55,7 +54,6 @@ const AudioPlayer = ({
               setUser,
               setSetting,
               track,
-              heartList,
               storeHeartList,
             }}
           />

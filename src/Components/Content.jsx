@@ -25,9 +25,9 @@ const Content = ({
   timeProgress,
   token,
   setTrack,
-  heartList,
   storeHeartList,
   setPlayList,
+  favourites,
 }) => {
   return (
     <>
@@ -40,9 +40,9 @@ const Content = ({
               setIsPlaying,
               isPlaying,
               audioRef,
-              heartList,
               storeHeartList,
               setPlayList,
+              favourites,
             }}
           />
         )}
@@ -56,11 +56,24 @@ const Content = ({
               audioRef,
               setPlayList,
               storeHeartList,
-              heartList,
+              favourites,
             }}
           />
         )}
-        {like && <Like />}
+        {like && (
+          <Like
+            {...{
+              token,
+              favourites,
+              setTrack,
+              setIsPlaying,
+              isPlaying,
+              audioRef,
+              setPlayList,
+              storeHeartList,
+            }}
+          />
+        )}
         {player && (
           <Player
             {...{

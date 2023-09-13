@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { homeAlbum, homeTracks } from "../data";
-import { IoPlaySharp, IoPauseSharp, IoHeart } from "react-icons/io5";
+import { IoHeart } from "react-icons/io5";
 
 const Home = ({
   token,
@@ -10,9 +10,9 @@ const Home = ({
   setIsPlaying,
   isPlaying,
   audioRef,
-  heartList,
   storeHeartList,
   setPlayList,
+  favourites,
 }) => {
   const [res, setRes] = useState([]); // Store Album Tracks
   const [list, setList] = useState([]); // Store List Tracks
@@ -51,6 +51,7 @@ const Home = ({
       });
       const newArray = [...new Map(list.map((v) => [v.name, v])).values()];
       setList(newArray);
+      list.forEach((item) => (item.heart = false));
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +78,7 @@ const Home = ({
         <div>Loading..</div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-screen">
+          {/* Album */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {res.length > 0 &&
               res.map(
@@ -95,7 +97,7 @@ const Home = ({
                           className="max-h-full min-w-full rounded-box object-cover"
                           alt="banner"
                         />
-                        {isPlaying ? (
+                        {/* {isPlaying ? (
                           <IoPauseSharp
                             className="absolute bg-primary rounded-full p-3 left-[35%] top-[35%] text-6xl"
                             title="Play"
@@ -105,7 +107,7 @@ const Home = ({
                             className="absolute bg-primary rounded-full p-3 left-[35%] top-[35%] text-6xl"
                             title="Play"
                           />
-                        )}
+                        )} */}
                         <p className="absolute bottom-6 py-2 text-xl w-full text-center bg-secondary">
                           {item.name.replace(/ *\([^]*\) */g, "")}
                         </p>
@@ -115,49 +117,62 @@ const Home = ({
               )}
           </div>
 
+          {/* Tracks */}
           <div className="bg-white text-black p-3 lg:p-5 rounded-box lg:mt-12 lg:mx-16 mx-2 lg:h-5/6 overflow-y-scroll">
             <p className="">Home</p>
-            <p className="text-2xl font-bold  mb-6">Top Hits</p>
+            <p className="text-2xl font-bold mb-6">Top Hits</p>
             {list.length > 0 &&
               list.map(
                 (item, index) =>
                   index < 12 && (
                     <Fade delay={index} key={index}>
                       <div
-                        onClick={() => {
-                          play(item);
-                          setPlayList(list);
-                        }}
                         title={item.name}
-                        className="flex justify-stretch items-center space-x-6 mt-2 cursor-pointer">
-                        <div>
-                          {isPlaying ? (
-                            <IoPauseSharp
-                              className="text-secondary text-xl lg:text-3xl"
-                              title="Play"
-                            />
-                          ) : (
-                            <IoPlaySharp
-                              className="text-secondary text-xl lg:text-3xl"
-                              title="Play"
-                            />
-                          )}
+                        className="flex justify-between items-center">
+                        <div
+                          className="flex justify-stretch items-center space-x-6 mt-2 cursor-pointer"
+                          onClick={() => {
+                            play(item);
+                            setPlayList(list);
+                          }}>
+                          {/* <div>
+                            {isPlaying ? (
+                              <IoPauseSharp
+                                className="text-secondary text-xl lg:text-3xl"
+                                title="Play"
+                              />
+                            ) : (
+                              <IoPlaySharp
+                                className="text-secondary text-xl lg:text-3xl"
+                                title="Play"
+                              />
+                            )}
+                          </div> */}
+                          <img
+                            src={item.album.images[2].url}
+                            className="rounded-full object-cover"
+                            alt="avatar"
+                          />
+                          <p className="py-2 break-words text-xl text-secondary">
+                            {item.name.replace(/ *\([^]*\) */g, "")}
+                          </p>
                         </div>
-                        <img
-                          src={item.album.images[2].url}
-                          className="rounded-full object-cover"
-                          alt="avatar"
-                        />
-                        <p className="py-2 break-words text-xl text-secondary">
-                          {item.name.replace(/ *\([^]*\) */g, "")}
-                        </p>
-
-                        <IoHeart
-                          onClick={storeHeartList}
-                          className={`text-3xl hidden lg:block ${
-                            heartList && "text-icons"
-                          }`}
-                        />
+                        <div
+                          className={`${
+                            favourites.length > 0 &&
+                            favourites.forEach(
+                              (id) => item.id == id && (item.heart = true)
+                            )
+                          }`}>
+                          <IoHeart
+                            onClick={() => storeHeartList(item)}
+                            className={`text-3xl cursor-pointer ${
+                              item.heart == true
+                                ? "text-heart"
+                                : "text-secondary"
+                            }`}
+                          />
+                        </div>
                       </div>
                     </Fade>
                   )

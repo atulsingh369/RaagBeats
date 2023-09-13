@@ -30,9 +30,9 @@ export const searchTracks = [
   "5EVOYSyqFG7Bk76VFBftDA", // Ooh la la
   "2N9938r4qmE9yvxLRS7mIq", // Fugly
   "4Znd47cztY1DEmoWWVcP74", // Sinner
-  "5URS2EqxRcIVjIKLmVfgVG", // Sahi Galat
   "5tzUEeFlnW89ZURXnuiJCM", // Nadi Biche Naiya Dole
   "70MVLulHguwdhGo7100hsU", // Ik Lamha
+  "5URS2EqxRcIVjIKLmVfgVG", // Sahi Galat
 ];
 
 export const searchArtists = [

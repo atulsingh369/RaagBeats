@@ -29,13 +29,16 @@ export default function App() {
 
   const progressBarRef = useRef();
 
-  const [heartList, setHeartList] = useState(false);
-
-  const storeHeartList = () => {
-    track && setFavourites([...favourites, track.name]);
-    setHeartList(!heartList);
-
-    console.log(favourites);
+  const storeHeartList = (item) => {
+    if (item.heart == false) {
+      item && setFavourites([...favourites, item.id]);
+      item.heart = true;
+    } else {
+      setFavourites((favourites) =>
+        favourites.filter((elem) => elem !== item.id)
+      );
+      item.heart = false;
+    }
   };
 
   const handleNext = () => {
@@ -83,7 +86,7 @@ export default function App() {
   return (
     <>
       <React.StrictMode>
-        <div className="bg-secondary flex h-screen transition-all duration-500 ease-linear text-white">
+        <div className="bg-secondary flex h-screen transition-all duration-500 ease-linear text-white scroll-smooth">
           <SideBar
             {...{
               home,
@@ -121,9 +124,9 @@ export default function App() {
               timeProgress,
               token,
               setTrack,
-              heartList,
               storeHeartList,
               setPlayList,
+              favourites,
             }}
           />
         </div>
@@ -148,7 +151,6 @@ export default function App() {
             setIsPlaying,
             timeProgress,
             track,
-            heartList,
             storeHeartList,
             setTrack,
           }}

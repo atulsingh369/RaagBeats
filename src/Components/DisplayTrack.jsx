@@ -13,7 +13,7 @@ const DisplayTrack = ({
   setUser,
   setSetting,
   track,
-  heartList,
+  heart,
   storeHeartList,
 }) => {
   const onLoadedMetadata = () => {
@@ -94,7 +94,7 @@ const DisplayTrack = ({
         <IoHeart
           onClick={storeHeartList}
           className={`md:text-3xl ${!player && "hidden"} ${
-            heartList && "text-icons"
+            heart && "text-icons"
           }`}
         />
       </div>

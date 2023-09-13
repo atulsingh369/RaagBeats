@@ -8,8 +8,12 @@ const ArtistTracks = ({
   setPlayList,
   name,
   storeHeartList,
-  heartList,
+  favourites,
 }) => {
+  artistTracks.forEach((item) => {
+    item.heart = false;
+  });
+
   return (
     <>
       <div className="flex justify-start items-center">
@@ -17,7 +21,7 @@ const ArtistTracks = ({
           xmlns="http://www.w3.org/2000/svg"
           width="32"
           height="32"
-          className="mx-2 hidden lg:block cursor-pointer"
+          className="mx-2 cursor-pointer"
           title="Clear"
           onClick={() => setArtistDisp(false)}
           viewBox="0 0 24 24">
@@ -39,31 +43,43 @@ const ArtistTracks = ({
             "name" in item && (
               <Fade delay={index} key={index}>
                 <div
-                  onClick={() => {
-                    play(item);
-                    setPlayList(artistTracks);
-                  }}
                   title={item.name}
-                  className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
-                  <img
-                    src={item.album && item.album.images[2].url}
-                    className=" rounded-full object-cover"
-                    alt="avatar"
-                  />
-                  <div>
-                    <p className="py-2 break-words text-xl text-secondary">
-                      {item.name}
-                    </p>
-                    <p className="break-words text-lg text-secondary">
-                      {item.artists && item.artists[0].name}
-                    </p>
+                  className="flex justify-between items-center">
+                  <div
+                    onClick={() => {
+                      play(item);
+                      setPlayList(artistTracks);
+                    }}
+                    title={item.name}
+                    className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
+                    <img
+                      src={item.album && item.album.images[2].url}
+                      className=" rounded-full object-cover"
+                      alt="avatar"
+                    />
+                    <div>
+                      <p className="py-2 break-words text-xl text-secondary">
+                        {item.name}
+                      </p>
+                      <p className="break-words text-lg text-secondary">
+                        {item.artists && item.artists[0].name}
+                      </p>
+                    </div>
                   </div>
-                  <IoHeart
-                    onClick={storeHeartList}
-                    className={`text-3xl hidden lg:block ${
-                      heartList && "text-icons"
-                    }`}
-                  />
+                  <div
+                    className={`${
+                      favourites.length > 0 &&
+                      favourites.forEach(
+                        (id) => item.id == id && (item.heart = true)
+                      )
+                    }`}>
+                    <IoHeart
+                      onClick={() => storeHeartList(item)}
+                      className={`text-3xl cursor-pointer ${
+                        item.heart == true ? "text-heart" : "text-secondary"
+                      }`}
+                    />
+                  </div>
                 </div>
               </Fade>
             )

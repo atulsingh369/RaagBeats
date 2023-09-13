@@ -14,7 +14,7 @@ const Search = ({
   audioRef,
   setPlayList,
   storeHeartList,
-  heartList,
+  favourites,
 }) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]); // store search result
@@ -180,7 +180,7 @@ const Search = ({
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"
-                  className="mx-2 hidden lg:block cursor-pointer"
+                  className="mx-2 cursor-pointer"
                   title="Clear"
                   onClick={() => setSearch("")}
                   viewBox="0 0 24 24">
@@ -235,7 +235,7 @@ const Search = ({
                   (item, index) =>
                     item.preview_url !== null &&
                     "name" in item &&
-                    index < 8 && (
+                    index < 10 && (
                       <Fade delay={index} key={index}>
                         {/* Search Result */}
                         <div
@@ -286,7 +286,7 @@ const Search = ({
                   setPlayList,
                   name,
                   storeHeartList,
-                  heartList,
+                  favourites,
                 }}
               />
             ) : (
@@ -300,7 +300,7 @@ const Search = ({
                     name,
                     image,
                     storeHeartList,
-                    heartList,
+                    favourites,
                   }}
                 />
               )
