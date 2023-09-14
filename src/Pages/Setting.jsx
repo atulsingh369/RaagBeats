@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import SettingLoader from "../Components/Loaders/SettingLoader";
 
-const Setting = () => {
+const Setting = ({ setMiniPlayer }) => {
   const [loading, setLoading] = useState(true); // Set Loading
 
   useEffect(() => {
+    setMiniPlayer(false);
     setTimeout(() => {
       setLoading(false);
     }, 2500);

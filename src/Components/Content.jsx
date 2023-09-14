@@ -1,7 +1,6 @@
 import Home from "../Pages/Home";
 import Search from "../Pages/Search";
 import Like from "../Pages/Like";
-import Player from "../Pages/Player";
 import User from "../Pages/User";
 import Setting from "../Pages/Setting";
 
@@ -13,30 +12,13 @@ const Content = ({
   user,
   setting,
   audioRef,
-  setDuration,
-  progressBarRef,
-  handleNext,
-  duration,
-  setTimeProgress,
-  trackIndex,
-  setTrackIndex,
   isPlaying,
   setIsPlaying,
-  timeProgress,
   token,
   setTrack,
   storeHeartList,
   setPlayList,
   favourites,
-  setHome,
-  setSearch,
-  setLike,
-  setPlayer,
-  setUser,
-  setSetting,
-  playList,
-  track,
-  miniPlayer,
   setMiniPlayer,
 }) => {
   return (
@@ -53,6 +35,7 @@ const Content = ({
               storeHeartList,
               setPlayList,
               favourites,
+              setMiniPlayer,
             }}
           />
         )}
@@ -67,6 +50,7 @@ const Content = ({
               setPlayList,
               storeHeartList,
               favourites,
+              setMiniPlayer,
             }}
           />
         )}
@@ -81,40 +65,13 @@ const Content = ({
               audioRef,
               setPlayList,
               storeHeartList,
-            }}
-          />
-        )}
-        {player && (
-          <Player
-            {...{
-              setHome,
-              setSearch,
-              setLike,
-              setPlayer,
-              setUser,
-              setSetting,
-              audioRef,
-              setDuration,
-              progressBarRef,
-              handleNext,
-              duration,
-              setTimeProgress,
-              playList,
-              trackIndex,
-              setTrackIndex,
-              isPlaying,
-              setIsPlaying,
-              timeProgress,
-              track,
-              storeHeartList,
-              setTrack,
-              miniPlayer,
               setMiniPlayer,
             }}
           />
         )}
-        {user && <User {...{}} />}
-        {setting && <Setting {...{}} />}
+        {player && setMiniPlayer(true)}
+        {user && <User {...{ setMiniPlayer }} />}
+        {setting && <Setting {...{ setMiniPlayer }} />}
       </div>
     </>
   );

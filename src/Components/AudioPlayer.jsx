@@ -27,10 +27,16 @@ const AudioPlayer = ({
   track,
   storeHeartList,
   setTrack,
+  favourites,
 }) => {
   return (
     <>
-      <div className={`${!miniPlayer && "fixed bottom-0"} bg-secondary`}>
+      <div
+        className={`${
+          !miniPlayer
+            ? "fixed bottom-0"
+            : "absolute top-[50%] left-[50%] -translate-x-1/3 lg:-translate-x-1/2 -translate-y-1/2"
+        }`}>
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
@@ -38,7 +44,7 @@ const AudioPlayer = ({
           className={`flex text-2xl font-semibold bg-primary items-center border-white ${
             !miniPlayer
               ? "w-screen md:h-32 border-y-2 rounded-xl"
-              : "flex-col border-2 p-2 space-y-6 rounded-box md:w-96"
+              : "flex-col border-2 lg:p-3 p-1 space-y-6 rounded-box w-64 lg:w-96"
           }`}>
           <DisplayTrack
             {...{
@@ -55,6 +61,7 @@ const AudioPlayer = ({
               setSetting,
               track,
               storeHeartList,
+              favourites,
             }}
           />
           <Controls

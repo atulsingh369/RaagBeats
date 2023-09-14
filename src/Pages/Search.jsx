@@ -17,6 +17,7 @@ const Search = ({
   setPlayList,
   storeHeartList,
   favourites,
+  setMiniPlayer,
 }) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]); // store search result
@@ -165,6 +166,7 @@ const Search = ({
     getList();
     getArtists();
     getAlbums();
+    setMiniPlayer(false);
     setTimeout(() => {
       token !== "" && setLoading(false);
     }, 2500);
@@ -176,6 +178,7 @@ const Search = ({
         <SearchLoader />
       ) : (
         <>
+          {/* Search */}
           <div className="p-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {/* Search Bar */}
             <div className="flex sticky top-0 z-10 justify-evenly bg-[#3b3b3b] rounded-box items-center">
@@ -269,7 +272,7 @@ const Search = ({
                           <div
                             onClick={() => {
                               play(item);
-                              setPlayList(albumTracks);
+                              setPlayList(list);
                             }}
                             title={item.name}
                             className="flex justify-stretch items-center space-x-6 mt-5 cursor-pointer">
@@ -305,6 +308,7 @@ const Search = ({
                 )}
           </div>
 
+          {/* Artists/Albums */}
           <div className="px-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {!artistDisp && !albumDisp ? (
               <SearchAlbumArtist

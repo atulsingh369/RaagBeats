@@ -14,6 +14,7 @@ const Home = ({
   storeHeartList,
   setPlayList,
   favourites,
+  setMiniPlayer,
 }) => {
   const [res, setRes] = useState([]); // Store Album Tracks
   const [list, setList] = useState([]); // Store List Tracks
@@ -70,6 +71,7 @@ const Home = ({
   useEffect(() => {
     getTrack();
     getList();
+    setMiniPlayer(false);
     setTimeout(() => {
       token !== "" && setLoading(false);
     }, 3500);
@@ -136,19 +138,6 @@ const Home = ({
                             play(item);
                             setPlayList(list);
                           }}>
-                          {/* <div>
-                            {isPlaying ? (
-                              <IoPauseSharp
-                                className="text-secondary text-xl lg:text-3xl"
-                                title="Play"
-                              />
-                            ) : (
-                              <IoPlaySharp
-                                className="text-secondary text-xl lg:text-3xl"
-                                title="Play"
-                              />
-                            )}
-                          </div> */}
                           <img
                             src={item.album.images[2].url}
                             className="rounded-full object-cover"

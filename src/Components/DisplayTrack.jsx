@@ -14,7 +14,7 @@ const DisplayTrack = ({
   setUser,
   setSetting,
   track,
-  heart,
+  favourites,
   storeHeartList,
 }) => {
   const onLoadedMetadata = () => {
@@ -91,17 +91,33 @@ const DisplayTrack = ({
             <p className="md:text-2xl text-xl text-center">
               {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
             </p>
-            <p className="md:text-xl text-lg text-center">
-              {track ? track.artists[0].name : "Narci"}
-            </p>
+            <div className="flex justify-evenly items-center">
+              <p className="md:text-xl text-lg text-center">
+                {track ? track.artists[0].name : "Narci"}
+              </p>
+              <div
+                className={`${
+                  favourites.length > 0 &&
+                  track &&
+                  favourites.forEach((id) =>
+                    track.id == id
+                      ? (track.heart = true)
+                      : (track.heart = false)
+                  )
+                }`}>
+                <IoHeart
+                  onClick={() => storeHeartList(track)}
+                  className={`text-3xl cursor-pointer ${
+                    track
+                      ? track.heart == true
+                        ? "text-heart"
+                        : "text-white"
+                      : "text-heart"
+                  }`}
+                />
+              </div>
+            </div>
           </div>
-
-          <IoHeart
-            onClick={storeHeartList}
-            className={`md:text-3xl ${!miniPlayer && "hidden"} ${
-              heart && "text-icons"
-            }`}
-          />
         </div>
       </Fade>
       <audio

@@ -15,12 +15,14 @@ const Like = ({
   audioRef,
   setPlayList,
   storeHeartList,
+  setMiniPlayer,
 }) => {
   const [res, setRes] = useState([]);
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getLikedTracks = () => {
+    setRes([]);
     try {
       favourites.length > 0 &&
         favourites.forEach(async (item) => {
@@ -33,8 +35,6 @@ const Like = ({
             }
           );
           data.preview_url !== null && setRes((res) => [...res, data]);
-          // const newArray = [...new Map(res.map((v) => [v.name, v])).values()];
-          // setRes(newArray);
         });
     } catch (error) {
       console.log(error);
@@ -74,10 +74,11 @@ const Like = ({
   useEffect(() => {
     getLikedTracks();
     getLikedList();
+    setMiniPlayer(false);
     setTimeout(() => {
       token !== "" && setLoading(false);
     }, 2000);
-  }, [token]);
+  }, [token, favourites]);
 
   return (
     <>

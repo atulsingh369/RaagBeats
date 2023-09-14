@@ -96,7 +96,7 @@ export default function App() {
       ) : (
         <>
           <React.StrictMode>
-            <div className="bg-secondary flex h-screen transition-all duration-500 ease-linear text-white scroll-smooth">
+            <div className="flex h-screen bg-secondary transition-all duration-500 ease-linear text-white scroll-smooth">
               <div id="stars"></div>
               <div id="stars2"></div>
               <div id="stars3"></div>
@@ -126,34 +126,18 @@ export default function App() {
                   user,
                   setting,
                   audioRef,
-                  setDuration,
-                  progressBarRef,
-                  handleNext,
-                  duration,
-                  setTimeProgress,
-                  trackIndex,
-                  setTrackIndex,
                   isPlaying,
                   setIsPlaying,
-                  timeProgress,
                   token,
                   setTrack,
                   storeHeartList,
                   setPlayList,
                   favourites,
-                  setHome,
-                  setSearch,
-                  setLike,
-                  setPlayer,
-                  setUser,
-                  setSetting,
-                  playList,
-                  track,
-                  miniPlayer,
                   setMiniPlayer,
                 }}
               />
             </div>
+
             <AudioPlayer
               {...{
                 miniPlayer,
@@ -178,16 +162,9 @@ export default function App() {
                 track,
                 storeHeartList,
                 setTrack,
+                favourites,
               }}
             />
-            <div className="fixed bottom-">
-              <p
-                className={`flex justify-center items-center text-lg md:text-xl font-semibold text-white ${
-                  !miniPlayer && "hidden"
-                }`}>
-                Built with ❤️ By Atul Singh
-              </p>
-            </div>
           </React.StrictMode>
         </>
       )}
