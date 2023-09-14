@@ -5,7 +5,7 @@ const DisplayTrack = ({
   setDuration,
   progressBarRef,
   handleNext,
-  player,
+  miniPlayer,
   setHome,
   setSearch,
   setLike,
@@ -40,15 +40,15 @@ const DisplayTrack = ({
   return (
     <div
       className={`w-full space-y-4 flex items-center justify-evenly ${
-        player ? "flex-col" : "my-2"
+        miniPlayer ? "flex-col" : "my-2"
       }`}>
       {/* Track Img */}
       <div
         onClick={() => handleClickIcons(3)}
-        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary cursor-pointer ${
-          !player
+        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary ${
+          !miniPlayer
             ? "md:flex hidden w-fit h-fit animate-spin-slow rounded-full"
-            : "flex w-full  rounded-box"
+            : "flex w-full rounded-box"
         }`}
         style={{
           backgroundImage:
@@ -62,13 +62,13 @@ const DisplayTrack = ({
         }}>
         <div
           className={`flex items-center backdrop-blur-md ${
-            !player
+            !miniPlayer
               ? "h-24 w-24 rounded-full"
               : "md:h-96 h-56 w-full rounded-box"
           }`}>
           <img
             className={`max-h-full min-w-full object-contain ${
-              !player ? "rounded-full" : "rounded-box"
+              !miniPlayer ? "rounded-full" : "rounded-box"
             }`}
             src={
               track && track.album
@@ -81,7 +81,7 @@ const DisplayTrack = ({
       </div>
 
       {/* Track Details */}
-      <div className={`flex justify-evenly items-center ${player && "w-full"}`}>
+      <div className={`flex justify-evenly items-center ${miniPlayer && "w-full"}`}>
         <div className="space-y-2">
           <p className="md:text-2xl text-xl text-center">
             {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
@@ -93,7 +93,7 @@ const DisplayTrack = ({
 
         <IoHeart
           onClick={storeHeartList}
-          className={`md:text-3xl ${!player && "hidden"} ${
+          className={`md:text-3xl ${!miniPlayer && "hidden"} ${
             heart && "text-icons"
           }`}
         />

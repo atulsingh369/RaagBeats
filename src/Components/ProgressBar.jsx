@@ -5,7 +5,7 @@ const ProgressBar = ({
   audioRef,
   timeProgress,
   duration,
-  player,
+  miniPlayer,
 }) => {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
@@ -26,7 +26,7 @@ const ProgressBar = ({
     <>
       <div
         className={`flex w-full justify-evenly items-center mx-5 my-3 ${
-          !player && "md:flex hidden my-0"
+          !miniPlayer && "md:flex hidden my-0"
         }`}>
         <div className="md:text-xl text-lg">{formatTime(timeProgress)}</div>
         <input

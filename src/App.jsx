@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import AudioPlayer from "./Components/AudioPlayer";
 import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";
-// import Search from "./Components/Search";
 import axios from "axios";
 
 export default function App() {
@@ -18,6 +17,7 @@ export default function App() {
   const [token, setToken] = useState(""); // Store Token to call API's
   const [track, setTrack] = useState(); // Store Tracks came from API's
   const [playList, setPlayList] = useState([]); // Store Playlist of Tracks came from API's
+  const [miniPlayer, setMiniPlayer] = useState(false); // Check for MiniPlayer Controls
 
   // Defining all controls here to initialize both players at same time to make it sync with each other
   const [trackIndex, setTrackIndex] = useState(0);
@@ -87,6 +87,9 @@ export default function App() {
     <>
       <React.StrictMode>
         <div className="bg-secondary flex h-screen transition-all duration-500 ease-linear text-white scroll-smooth">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
           <SideBar
             {...{
               home,
@@ -101,6 +104,7 @@ export default function App() {
               setPlayer,
               setUser,
               setSetting,
+              miniPlayer,
             }}
           />
           <Content
@@ -127,11 +131,22 @@ export default function App() {
               storeHeartList,
               setPlayList,
               favourites,
+              setHome,
+              setSearch,
+              setLike,
+              setPlayer,
+              setUser,
+              setSetting,
+              playList,
+              track,
+              miniPlayer,
+              setMiniPlayer,
             }}
           />
         </div>
         <AudioPlayer
           {...{
+            miniPlayer,
             setHome,
             setSearch,
             setLike,
@@ -155,7 +170,14 @@ export default function App() {
             setTrack,
           }}
         />
-        {/* <Search {...{ token }} /> */}
+        <div className="fixed bottom-0">
+          <span
+            className={`flex justify-center items-center text-lg md:text-xl font-semibold text-white ${
+              !miniPlayer && "hidden"
+            }`}>
+            Built with ❤️ By Atul Singh
+          </span>
+        </div>
       </React.StrictMode>
     </>
   );

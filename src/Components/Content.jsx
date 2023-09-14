@@ -28,6 +28,16 @@ const Content = ({
   storeHeartList,
   setPlayList,
   favourites,
+  setHome,
+  setSearch,
+  setLike,
+  setPlayer,
+  setUser,
+  setSetting,
+  playList,
+  track,
+  miniPlayer,
+  setMiniPlayer,
 }) => {
   return (
     <>
@@ -43,6 +53,7 @@ const Content = ({
               storeHeartList,
               setPlayList,
               favourites,
+              setMiniPlayer,
             }}
           />
         )}
@@ -57,6 +68,7 @@ const Content = ({
               setPlayList,
               storeHeartList,
               favourites,
+              setMiniPlayer,
             }}
           />
         )}
@@ -71,28 +83,53 @@ const Content = ({
               audioRef,
               setPlayList,
               storeHeartList,
+              setMiniPlayer,
             }}
           />
         )}
         {player && (
           <Player
             {...{
+              setHome,
+              setSearch,
+              setLike,
+              setPlayer,
+              setUser,
+              setSetting,
               audioRef,
               setDuration,
               progressBarRef,
               handleNext,
               duration,
               setTimeProgress,
+              playList,
               trackIndex,
               setTrackIndex,
               isPlaying,
               setIsPlaying,
               timeProgress,
+              track,
+              storeHeartList,
+              setTrack,
+              miniPlayer,
+              setMiniPlayer,
             }}
           />
         )}
-        {user && <User />}
-        {setting && <Setting />}
+        {user && (
+          <User
+            {...{
+              setMiniPlayer,
+            }}
+          />
+        )}
+        {setting && (
+          <Setting
+            {...{
+              setMiniPlayer,
+            }}
+          />
+        )}
       </div>
     </>
   );

@@ -2,23 +2,31 @@ import AudioPlayer from "../Components/AudioPlayer";
 import { Fade } from "react-awesome-reveal";
 
 const Player = ({
-  favourites,
-  setFavourites,
-  currentTrack,
+  setHome,
+  setSearch,
+  setLike,
+  setPlayer,
+  setUser,
+  setSetting,
   audioRef,
   setDuration,
   progressBarRef,
   handleNext,
   duration,
   setTimeProgress,
+  playList,
   trackIndex,
   setTrackIndex,
-  setCurrentTrack,
   isPlaying,
   setIsPlaying,
   timeProgress,
+  track,
+  storeHeartList,
+  setTrack,
+  miniPlayer,
+  setMiniPlayer,
 }) => {
-  const player = true; // To ensure only sideplayer control is active => We will pass this in each component of Audioplayer to ensure different configuration for each type.
+  setMiniPlayer(true);
 
   return (
     <>
@@ -26,22 +34,28 @@ const Player = ({
         <Fade direction="up">
           <AudioPlayer
             {...{
-              favourites,
-              setFavourites,
-              player,
-              currentTrack,
+              miniPlayer,
+              setHome,
+              setSearch,
+              setLike,
+              setPlayer,
+              setUser,
+              setSetting,
               audioRef,
               setDuration,
               progressBarRef,
               handleNext,
               duration,
               setTimeProgress,
+              playList,
               trackIndex,
               setTrackIndex,
-              setCurrentTrack,
               isPlaying,
               setIsPlaying,
               timeProgress,
+              track,
+              storeHeartList,
+              setTrack,
             }}
           />
         </Fade>

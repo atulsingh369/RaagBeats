@@ -14,6 +14,7 @@ const Home = ({
   storeHeartList,
   setPlayList,
   favourites,
+  setMiniPlayer,
 }) => {
   const [res, setRes] = useState([]); // Store Album Tracks
   const [list, setList] = useState([]); // Store List Tracks
@@ -67,6 +68,8 @@ const Home = ({
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
 
+  setMiniPlayer(false);
+
   useEffect(() => {
     getTrack();
     getList();
@@ -110,17 +113,17 @@ const Home = ({
           </div>
 
           {/* Tracks */}
-          <div className="px-3 mt-5 items-center bg-white rounded-xl text-black lg:h-5/6 h-1/2 lg:w-3/4 lg:mx-16 mx-2 overflow-y-scroll transition-all ease-in-out duration-300">
-            <Fade delay={10}>
-              <div className="sticky top-0 z-10 bg-white py-3">
+          <div className="px-3 mt-5 items-center bg-white rounded-xl text-black lg:h-3/4 h-1/2 lg:w-3/4 lg:mx-16 mx-2 overflow-y-scroll transition-all ease-in-out duration-300">
+            <div className="sticky top-0 z-10 bg-white py-3">
+              <Fade delay={10}>
                 <img
                   src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
                   alt="Welcome To RaagBeats"
                   className="rounded-box"
                 />
                 <p className="py-3 text-2xl font-bold">Top Hits</p>
-              </div>
-            </Fade>
+              </Fade>
+            </div>
 
             {list.length > 0 &&
               list.map(

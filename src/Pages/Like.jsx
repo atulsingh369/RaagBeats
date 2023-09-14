@@ -15,6 +15,7 @@ const Like = ({
   audioRef,
   setPlayList,
   storeHeartList,
+  setMiniPlayer,
 }) => {
   const [res, setRes] = useState([]);
   const [list, setList] = useState([]);
@@ -70,6 +71,8 @@ const Like = ({
     }, 50);
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
+
+  setMiniPlayer(false);
 
   useEffect(() => {
     getLikedTracks();

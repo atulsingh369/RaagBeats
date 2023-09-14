@@ -5,7 +5,7 @@ import ProgressBar from "./ProgressBar";
 import "./style.scss";
 
 const AudioPlayer = ({
-  player,
+  miniPlayer,
   setHome,
   setSearch,
   setLike,
@@ -30,23 +30,23 @@ const AudioPlayer = ({
 }) => {
   return (
     <>
-      <div className={`${!player && "fixed bottom-0"} bg-secondary`}>
+      <div className={`${!miniPlayer && "fixed bottom-0"} bg-secondary`}>
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
         <div
-          className={`flex text-2xl font-semibold bg-primary text-white items-center border-white ${
-            !player
+          className={`flex text-2xl font-semibold bg-primary items-center border-white ${
+            !miniPlayer
               ? "w-screen md:h-32 border-y-2 rounded-xl"
-              : "flex-col border-2 p-2 rounded-box md:w-96"
+              : "flex-col border-2 p-2 space-y-6 rounded-box md:w-96"
           }`}>
-          <div id="stars"></div>
-          <div id="stars2"></div>
-          <div id="stars3"></div>
           <DisplayTrack
             {...{
               audioRef,
               setDuration,
               progressBarRef,
               handleNext,
-              player,
+              miniPlayer,
               setHome,
               setSearch,
               setLike,
@@ -69,17 +69,23 @@ const AudioPlayer = ({
               handleNext,
               isPlaying,
               setIsPlaying,
-              player,
+              miniPlayer,
               setTrack,
             }}
           />
           <ProgressBar
-            {...{ progressBarRef, audioRef, timeProgress, duration, player }}
+            {...{
+              progressBarRef,
+              audioRef,
+              timeProgress,
+              duration,
+              miniPlayer,
+            }}
           />
         </div>
         <p
           className={`text-center text-lg md:text-xl font-semibold text-white ${
-            player && "hidden"
+            miniPlayer && "hidden"
           }`}>
           Built with ❤️ By Atul Singh
         </p>

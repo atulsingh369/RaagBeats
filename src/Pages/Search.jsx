@@ -6,6 +6,7 @@ import AlbumTracks from "../Components/AlbumTracks";
 import ArtistTracks from "../Components/ArtistTracks";
 import SearchAlbumArtist from "../Components/searchAlbumArtist";
 import { IoHeart } from "react-icons/io5";
+import SearchLoader from "../Components/Loaders/SearchLoader";
 
 const Search = ({
   token,
@@ -16,6 +17,7 @@ const Search = ({
   setPlayList,
   storeHeartList,
   favourites,
+  setMiniPlayer,
 }) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]); // store search result
@@ -159,18 +161,22 @@ const Search = ({
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
 
+  setMiniPlayer(false);
+
   useEffect(() => {
     search !== "" && getTrack();
     getList();
     getArtists();
     getAlbums();
-    (token !== "") & setLoading(false);
+    setTimeout(() => {
+      token !== "" && setLoading(false);
+    }, 2500);
   }, [search, token]);
 
   return (
     <>
       {loading ? (
-        <div>Loading..</div>
+        <SearchLoader />
       ) : (
         <>
           <div className="p-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
