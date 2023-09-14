@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import UserLoader from "../Components/Loaders/UserLoader";
 
-const User = ({ setMiniPlayer }) => {
+const User = () => {
   const [loading, setLoading] = useState(true); // Set Loading
-  setMiniPlayer(false);
 
   useEffect(() => {
     setTimeout(() => {

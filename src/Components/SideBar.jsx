@@ -1,3 +1,4 @@
+import { Fade } from "react-awesome-reveal";
 import {
   IoHome,
   IoSearch,
@@ -45,59 +46,61 @@ const SideBar = ({
           className={`${
             miniPlayer ? "h-5/6 lg:h-full" : "h-3/4 lg:h-5/6 "
           } flex flex-col justify-evenly items-center`}>
-          <IoHome
-            title="Home"
-            onClick={() => handleClickIcons(0)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              home && "text-icons"
-            }`}
-          />
-          <IoSearch
-            title="Search"
-            onClick={() => handleClickIcons(1)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              search && "text-icons"
-            }`}
-          />
-          <IoHeart
-            title="Favourites"
-            onClick={() => handleClickIcons(2)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              like && "text-icons"
-            }`}
-          />
-          <IoMusicalNotes
-            title="Player"
-            onClick={() => handleClickIcons(3)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              player && "text-icons"
-            }`}
-          />
-          <IoPerson
-            title="User"
-            onClick={() => handleClickIcons(4)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              user && "text-icons"
-            }`}
-          />
-          <IoSettingsSharp
-            title="Settings"
-            onClick={() => handleClickIcons(5)}
-            className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
-              setting && "text-icons"
-            }`}
-          />
-          <a
-            href="https://atulsingh369.netlify.app/"
-            target="_blank"
-            rel="noopener noreferrer">
-            <img
-              title="Developer"
-              src="https://ik.imagekit.io/xji6otwwkb/Portfolio/android-chrome-512x512.png?updatedAt=1689898722189"
-              alt="Developer"
-              className="h-12 w-12 cursor-pointer"
+          <Fade direction="left" cascade={true}>
+            <IoHome
+              title="Home"
+              onClick={() => handleClickIcons(0)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                home && "text-icons"
+              }`}
             />
-          </a>
+            <IoSearch
+              title="Search"
+              onClick={() => handleClickIcons(1)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                search && "text-icons"
+              }`}
+            />
+            <IoHeart
+              title="Favourites"
+              onClick={() => handleClickIcons(2)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                like && "text-icons"
+              }`}
+            />
+            <IoMusicalNotes
+              title="Player"
+              onClick={() => handleClickIcons(3)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                player && "text-icons"
+              }`}
+            />
+            <IoPerson
+              title="User"
+              onClick={() => handleClickIcons(4)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                user && "text-icons"
+              }`}
+            />
+            <IoSettingsSharp
+              title="Settings"
+              onClick={() => handleClickIcons(5)}
+              className={`text-2xl lg:text-4xl lg:mx-5 cursor-pointer transition-all duration-200 hover:text-icons ${
+                setting && "text-icons"
+              }`}
+            />
+            <a
+              href="https://atulsingh369.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer">
+              <img
+                title="Developer"
+                src="https://ik.imagekit.io/xji6otwwkb/Portfolio/android-chrome-512x512.png?updatedAt=1689898722189"
+                alt="Developer"
+                className="h-12 w-12 cursor-pointer"
+              />
+            </a>
+          </Fade>
         </div>
       </div>
     </>

@@ -17,7 +17,6 @@ const Search = ({
   setPlayList,
   storeHeartList,
   favourites,
-  setMiniPlayer,
 }) => {
   const [search, setSearch] = useState("");
   const [res, setRes] = useState([]); // store search result
@@ -160,8 +159,6 @@ const Search = ({
     }, 50);
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
-
-  setMiniPlayer(false);
 
   useEffect(() => {
     search !== "" && getTrack();

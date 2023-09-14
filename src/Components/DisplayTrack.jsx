@@ -1,3 +1,4 @@
+import { Fade } from "react-awesome-reveal";
 import { IoHeart } from "react-icons/io5";
 
 const DisplayTrack = ({
@@ -80,25 +81,29 @@ const DisplayTrack = ({
         </div>
       </div>
 
-      {/* Track Details */}
-      <div className={`flex justify-evenly items-center ${miniPlayer && "w-full"}`}>
-        <div className="space-y-2">
-          <p className="md:text-2xl text-xl text-center">
-            {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
-          </p>
-          <p className="md:text-xl text-lg text-center">
-            {track ? track.artists[0].name : "Narci"}
-          </p>
+      <Fade direction="left">
+        {/* Track Details */}
+        <div
+          className={`flex justify-evenly items-center ${
+            miniPlayer && "w-full"
+          }`}>
+          <div className="space-y-2">
+            <p className="md:text-2xl text-xl text-center">
+              {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
+            </p>
+            <p className="md:text-xl text-lg text-center">
+              {track ? track.artists[0].name : "Narci"}
+            </p>
+          </div>
+
+          <IoHeart
+            onClick={storeHeartList}
+            className={`md:text-3xl ${!miniPlayer && "hidden"} ${
+              heart && "text-icons"
+            }`}
+          />
         </div>
-
-        <IoHeart
-          onClick={storeHeartList}
-          className={`md:text-3xl ${!miniPlayer && "hidden"} ${
-            heart && "text-icons"
-          }`}
-        />
-      </div>
-
+      </Fade>
       <audio
         src={
           track

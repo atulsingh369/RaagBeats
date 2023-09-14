@@ -14,7 +14,6 @@ const Home = ({
   storeHeartList,
   setPlayList,
   favourites,
-  setMiniPlayer,
 }) => {
   const [res, setRes] = useState([]); // Store Album Tracks
   const [list, setList] = useState([]); // Store List Tracks
@@ -68,8 +67,6 @@ const Home = ({
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
   };
 
-  setMiniPlayer(false);
-
   useEffect(() => {
     getTrack();
     getList();
@@ -121,7 +118,7 @@ const Home = ({
                   alt="Welcome To RaagBeats"
                   className="rounded-box"
                 />
-                <p className="py-3 text-2xl font-bold">Top Hits</p>
+                <p className="py-3 text-2xl font-bold">Best Hits</p>
               </Fade>
             </div>
 

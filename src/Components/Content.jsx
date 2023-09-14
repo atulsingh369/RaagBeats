@@ -53,7 +53,6 @@ const Content = ({
               storeHeartList,
               setPlayList,
               favourites,
-              setMiniPlayer,
             }}
           />
         )}
@@ -68,7 +67,6 @@ const Content = ({
               setPlayList,
               storeHeartList,
               favourites,
-              setMiniPlayer,
             }}
           />
         )}
@@ -83,7 +81,6 @@ const Content = ({
               audioRef,
               setPlayList,
               storeHeartList,
-              setMiniPlayer,
             }}
           />
         )}
@@ -116,20 +113,8 @@ const Content = ({
             }}
           />
         )}
-        {user && (
-          <User
-            {...{
-              setMiniPlayer,
-            }}
-          />
-        )}
-        {setting && (
-          <Setting
-            {...{
-              setMiniPlayer,
-            }}
-          />
-        )}
+        {user && <User {...{}} />}
+        {setting && <Setting {...{}} />}
       </div>
     </>
   );
