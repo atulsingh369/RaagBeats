@@ -134,6 +134,9 @@ export default function App() {
                   setPlayList,
                   favourites,
                   setMiniPlayer,
+                  setLike,
+                  setUser,
+                  setSearch,
                 }}
               />
             </div>

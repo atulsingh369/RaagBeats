@@ -20,6 +20,9 @@ const Content = ({
   setPlayList,
   favourites,
   setMiniPlayer,
+  setLike,
+  setUser,
+  setSearch,
 }) => {
   return (
     <>
@@ -70,7 +73,7 @@ const Content = ({
           />
         )}
         {player && setMiniPlayer(true)}
-        {user && <User {...{ setMiniPlayer }} />}
+        {user && <User {...{ setMiniPlayer, setLike, setUser, setSearch }} />}
         {setting && <Setting {...{ setMiniPlayer }} />}
       </div>
     </>
