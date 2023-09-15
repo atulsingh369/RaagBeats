@@ -41,7 +41,7 @@ const SideBar = ({
 
   return (
     <>
-      <div className="border-r-2 border-r-white bg-primary h-screen w-2/12 lg:w-max rounded-xl flex flex-col items-center flex-wrap overflow-hidden">
+      <div className="border-r-2 border-r-white bg-primary h-full w-2/12 lg:w-max rounded-xl flex flex-col items-center flex-wrap overflow-hidden">
         <div
           className={`${
             miniPlayer ? "h-5/6 lg:h-full" : "h-3/4 lg:h-5/6 "
