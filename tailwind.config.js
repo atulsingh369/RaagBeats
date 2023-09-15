@@ -14,6 +14,7 @@ export default {
 				secondary: "#040415",
 				icons: "#74ee15",
 				heart: "#FE251B",
+				dark: "#3b3b3b",
 			},
 			animation: {
 				'spin-slow': 'spin 15s linear infinite',

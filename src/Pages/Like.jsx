@@ -87,12 +87,13 @@ const Like = ({
       ) : (
         <>
           <div
-            className={`px-3 items-center bg-white rounded-box text-black lg:w-1/3 m-5 overflow-y-scroll transition-all ease-in-out duration-300 ${
+            className={`px-3 animate__animated animate__flipInX items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 overflow-y-scroll transition-all ease-in-out duration-300 ${
               res.length > 0 ? "h-5/6" : "h-fit"
             }`}>
             <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
               Liked Tracks
             </p>
+
             {/* Artist Tracks */}
             {res.length > 0 ? (
               res.length > 0 &&
@@ -104,7 +105,7 @@ const Like = ({
                     <Fade delay={index} key={index}>
                       <div
                         title={item.name}
-                        className="flex justify-between items-center">
+                        className="flex justify-between items-center animate__animated animate__flipInX">
                         <div
                           onClick={() => {
                             play(item);
@@ -155,7 +156,7 @@ const Like = ({
           </div>
 
           {/* Editor Choice */}
-          <div className="px-3 items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+          <div className="px-3 animate__animated animate__flipInX items-center bg-white rounded-xl text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             <p className="bg-white py-3 text-2xl sticky top-0 z-10 font-bold">
               Editor Choice
             </p>

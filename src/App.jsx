@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import "animate.css";
 import AudioPlayer from "./Components/AudioPlayer";
 import SideBar from "./Components/SideBar";
 import Content from "./Components/Content";

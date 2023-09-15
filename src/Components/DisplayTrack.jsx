@@ -33,8 +33,7 @@ const DisplayTrack = ({
   ];
   const handleClickIcons = (e) => {
     for (let i = 0; i < setArray.length; ++i) {
-      e !== i && setArray[i](false);
-      setArray[e](true);
+      e !== i ? setArray[i](false) : setArray[i](true);
     }
   };
 
@@ -46,7 +45,7 @@ const DisplayTrack = ({
       {/* Track Img */}
       <div
         onClick={() => handleClickIcons(3)}
-        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary ${
+        className={`items-center justify-center bg-no-repeat bg-cover bg-secondary cursor-pointer ${
           !miniPlayer
             ? "md:flex hidden w-fit h-fit animate-spin-slow rounded-full"
             : "flex w-full rounded-box"
@@ -88,7 +87,9 @@ const DisplayTrack = ({
             miniPlayer && "w-full"
           }`}>
           <div className="space-y-2">
-            <p className="md:text-2xl text-xl text-center">
+            <p
+              onClick={() => handleClickIcons(3)}
+              className="md:text-2xl text-xl text-center cursor-pointer">
               {track ? track.name.replace(/ *\([^]*\) */g, "") : "Dashavatar"}
             </p>
             <div className="flex justify-evenly items-center">

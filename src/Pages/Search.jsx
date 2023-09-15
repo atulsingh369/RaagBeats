@@ -179,7 +179,7 @@ const Search = ({
       ) : (
         <>
           {/* Search */}
-          <div className="p-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+          <div className="p-3 animate__animated animate__flipInY items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {/* Search Bar */}
             <div className="flex sticky top-0 z-10 justify-evenly bg-[#3b3b3b] rounded-box items-center">
               {search && (
@@ -206,13 +206,13 @@ const Search = ({
               />
             </div>
 
-            {/* Recommendation */}
             {res.length > 0 && search
               ? res.map(
                   (item, index) =>
                     item.preview_url !== null &&
                     "name" in item && (
                       <Fade delay={index} key={index}>
+                        {/* Recommendation */}
                         <div
                           title={item.name}
                           className="flex justify-between items-center">
@@ -309,7 +309,7 @@ const Search = ({
           </div>
 
           {/* Artists/Albums */}
-          <div className="px-3 items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
+          <div className="px-3 animate__animated animate__flipInY items-center bg-white rounded-box text-black lg:w-1/3 w-full m-5 h-5/6 overflow-y-scroll transition-all ease-in-out duration-300">
             {!artistDisp && !albumDisp ? (
               <SearchAlbumArtist
                 {...{

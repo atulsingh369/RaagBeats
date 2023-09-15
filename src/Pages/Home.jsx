@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Fade } from "react-awesome-reveal";
+import { Fade, Zoom } from "react-awesome-reveal";
 import { homeAlbum, homeTracks } from "../data";
 import { IoHeart } from "react-icons/io5";
 import HomeLoader from "../Components/Loaders/HomeLoader";
@@ -84,29 +84,28 @@ const Home = ({
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:h-screen">
           {/* Album Desktop */}
-          <div className="lg:grid grid-cols-1 lg:grid-cols-2 gap-4 lg:mx-16 mx-2 hidden">
+          <div className="lg:grid lg:grid-cols-2 gap-4 lg:mx-16 hidden">
             {res.length > 0 &&
               res.map(
                 (item, index) =>
                   index < 6 && (
-                    <Fade delay={index * 10} key={index}>
-                      <div
-                        onClick={() => {
-                          play(item);
-                          setPlayList(res);
-                        }}
-                        title={item.name.replace(/ *\([^]*\) */g, "")}
-                        className="relative h-48 lg:h-56 rounded-box m-8 cursor-pointer">
-                        <img
-                          src={item.album.images[0].url}
-                          className="max-h-full min-w-full rounded-box object-cover"
-                          alt="banner"
-                        />
-                        <p className="absolute bottom-6 py-2 text-xl w-full text-center bg-secondary">
-                          {item.name.replace(/ *\([^]*\) */g, "")}
-                        </p>
-                      </div>
-                    </Fade>
+                    <div
+                      key={index}
+                      onClick={() => {
+                        play(item);
+                        setPlayList(res);
+                      }}
+                      title={item.name.replace(/ *\([^]*\) */g, "")}
+                      className="animate__animated animate__flipInY relative h-48 lg:h-56 rounded-box m-8 cursor-pointer">
+                      <img
+                        src={item.album.images[0].url}
+                        className="max-h-full min-w-full rounded-box object-cover"
+                        alt="banner"
+                      />
+                      <p className="absolute bottom-6 py-2 text-xl w-full text-center bg-secondary">
+                        {item.name.replace(/ *\([^]*\) */g, "")}
+                      </p>
+                    </div>
                   )
               )}
           </div>
@@ -114,14 +113,12 @@ const Home = ({
           {/* Tracks */}
           <div className="px-3 mt-5 items-center bg-white rounded-xl text-black lg:h-3/4 h-1/2 lg:w-3/4 lg:mx-16 mx-2 overflow-y-scroll transition-all ease-in-out duration-300">
             <div className="sticky top-0 z-10 bg-white py-3">
-              <Fade delay={10}>
-                <img
-                  src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
-                  alt="Welcome To RaagBeats"
-                  className="rounded-box"
-                />
-                <p className="py-3 text-2xl font-bold">Best Hits</p>
-              </Fade>
+              <img
+                src="https://ik.imagekit.io/xji6otwwkb/RaagBeats/RaagBeats%20Banner.png?updatedAt=1694639082586"
+                alt="Welcome To RaagBeats"
+                className="rounded-box animate__animated animate__bounceIn"
+              />
+              <p className="py-3 text-2xl font-bold">Best Hits</p>
             </div>
 
             {list.length > 0 &&
@@ -170,12 +167,12 @@ const Home = ({
           </div>
 
           {/* Album Mobile */}
-          <div className="lg:hidden grid grid-cols-1 lg:grid-cols-2 gap-4 -mt-96">
+          <div className="lg:hidden grid grid-cols-1 gap-4 -mt-96">
             {res.length > 0 &&
               res.map(
                 (item, index) =>
                   index < 6 && (
-                    <Fade delay={index * 10} key={index}>
+                    <Zoom cascade={true} delay={index * 10} key={index}>
                       <div
                         onClick={() => {
                           play(item);
@@ -192,7 +189,7 @@ const Home = ({
                           {item.name.replace(/ *\([^]*\) */g, "")}
                         </p>
                       </div>
-                    </Fade>
+                    </Zoom>
                   )
               )}
           </div>
