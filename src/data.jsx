@@ -1,9 +1,9 @@
 export const homeAlbum = [
-  "5YW4hPBW0Rw8I5VgXue6AK", // Mann mein Shor
-  "3QNB3V1DAdWp7WgbV8wJj8", // Fuk Fuk Fukrey
+  "0UZLaEOSIc5kg0cc7eszqC", // Manjha
+  "0TaL0jvsvRwm17IcGNZkpe", // Bhot Tez
   "6R9DVbFDwO8pwwkd515vyr", // Heroine
   "64jX14ntYSUd1lbzVgBMr6", // Ram Ram
-  "0PjlMtYAIBnCRajbUceZgc", // issa Vibe
+  "3QNB3V1DAdWp7WgbV8wJj8", // Fuk Fuk Fukrey
   "4St20qfnH98z2CEY7Up5yn", // Pungi
 ];
 
@@ -73,4 +73,17 @@ export const searchAlbums = [
   "6VIQGegahT7rrzE3MyZmyO", // Half CA
 ];
 
-// https://open.spotify.com/track/5EVOYSyqFG7Bk76VFBftDA?si=2eb9da1c25824fe2
+export const editorChoice = [
+  "1QaAXfq7b3p7q8oNC1jtcT", // Raghunandan
+  "2OwsHXukerkNFIwmNMi7E3", // De Mauka
+  "6ql3ec3NrwTvoPVaGUJkHY", // Narayan
+  "5YW4hPBW0Rw8I5VgXue6AK", // Mann mein Shor
+  "6bIGEeG0Q5mC310MfqjrPi", // Gokul ki Galiyon
+  "01d8tSqJUrPlK1l8FwgsCF", // Soorma
+  "5EVOYSyqFG7Bk76VFBftDA", // Ooh la la
+  "0FM7UuolKml9rpXkLvObdc", // Aaye na hamra Bihar mein
+  "5PUXKVVVQ74C3gl5vKy9Li", // Heeriye
+  "0PjlMtYAIBnCRajbUceZgc", // issa Vibe
+  "0DbRXNb2Hy0cS0BfsiyzpO", // Rabba
+  "1feANd8EfcDP5UqSvbheM3", // Bekhyali
+];

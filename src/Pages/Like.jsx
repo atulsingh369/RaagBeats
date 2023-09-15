@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { IoHeart } from "react-icons/io5";
 import LikeLoader from "../Components/Loaders/LikeLoader";
-import { homeTracks } from "../data";
+import { editorChoice } from "../data";
 
 const Like = ({
   token,
@@ -43,7 +43,7 @@ const Like = ({
 
   const getLikedList = async () => {
     try {
-      homeTracks.forEach(async (item) => {
+      editorChoice.forEach(async (item) => {
         const { data } = await axios.get(
           `https://api.spotify.com/v1/tracks/${item}`,
           {
