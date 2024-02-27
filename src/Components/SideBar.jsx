@@ -90,7 +90,7 @@ const SideBar = ({
               }`}
             />
             <a
-              href="https://atulsingh369.netlify.app/"
+              href="https://atulkumarsingh.netlify.app"
               target="_blank"
               rel="noopener noreferrer">
               <img
